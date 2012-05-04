@@ -49,7 +49,9 @@ set list
 set listchars=tab:>.,trail:.,extends:#,nbsp:.
 autocmd filetype html,xml set listchars-=tab:>.
 set pastetoggle=<F2>
+" Enable mouse
 set mouse=a
+" Disable arrow keys to move around
 map <up> <nop>
 map <down> <nop>
 map <left> <nop>
@@ -74,6 +76,7 @@ nnoremap <C-L> :call g:ToggleNuMode()<cr>
 
 " Specific filetypes for color syntaxing
 au BufNewFile,BufRead *.md set filetype=markdown
+" Drupal specific settings
 au BufNewFile,BufRead *.module set filetype=php
 au BufNewFile,BufRead *.module set shiftwidth=2
 au BufNewFile,BufRead *.admin.inc set filetype=php
@@ -81,9 +84,11 @@ au BufNewFile,BufRead *.json set filetype=javascript
 
 " Always keep the cursor at the middle
 "set scrolloff=1000
-
 set colorcolumn=0
-
 set foldmethod=indent
 
-set viewoptions=cursor,folds,slash,unix
+" zencoding configurations
+let g:user_zen_settings = {
+            \ 'indentation': '    ',
+\}
+let g:user_zen_expandabbr_key = '<c-e>'
