@@ -80,6 +80,7 @@ au BufNewFile,BufRead *.md set filetype=markdown
 au BufNewFile,BufRead *.module set filetype=php
 au BufNewFile,BufRead *.module set shiftwidth=2
 au BufNewFile,BufRead *.admin.inc set filetype=php
+au BufNewFile,BufRead *.admin.inc set shiftwidth=2
 au BufNewFile,BufRead *.json set filetype=javascript
 
 " Always keep the cursor at the middle
