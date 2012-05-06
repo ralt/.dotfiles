@@ -94,8 +94,3 @@ let g:user_zen_settings = {
 \}
 let g:user_zen_expandabbr_key = '<c-e>'
 
-" rainbow parentheses configuration
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
-au Syntax * RainbowParenthesesLoadChevrons
