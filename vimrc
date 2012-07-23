@@ -97,9 +97,6 @@ let g:user_zen_settings = {
 \}
 let g:user_zen_expandabbr_key = '<c-e>'
 
-" use ghc functionality for haskell files
-au Bufenter *.hs compiler ghc
-
 " enable rainbow parentheses
 au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
