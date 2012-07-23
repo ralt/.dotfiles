@@ -1,4 +1,7 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =2
+let g:netrw_dirhist_cnt =5
 let g:netrw_dirhist_1='/Users/florian/Development/ralt.github.com'
 let g:netrw_dirhist_2='/Users/florian/Development/ralt.github.com/_layouts'
+let g:netrw_dirhist_3='/home/vagrant/tapeer/.git'
+let g:netrw_dirhist_4='/home/vagrant/raynos-blog/templates'
+let g:netrw_dirhist_5='/home/vagrant/raynos-blog/templates/posts'
