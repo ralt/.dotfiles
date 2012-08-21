@@ -89,7 +89,7 @@ au BufNewFile,BufRead *.json set filetype=javascript
 
 " Always keep the cursor at the middle
 "set scrolloff=1000
-set colorcolumn=80
+"set colorcolumn=80
 set foldmethod=indent
 
 " zencoding configurations
