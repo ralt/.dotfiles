@@ -98,3 +98,10 @@ let g:user_zen_settings = {
 \}
 let g:user_zen_expandabbr_key = '<c-e>'
 
+au FileType c set makeprg=gcc\ %
+au FileType cpp set makeprg=g++\ %
+
+nnoremap <F5> :GundoToggle<CR>
+
+let g:Powerline_symbols = 'fancy'
+
