@@ -89,7 +89,10 @@ au BufNewFile,BufRead *.json set filetype=javascript
 
 " Always keep the cursor at the middle
 "set scrolloff=1000
+<<<<<<< HEAD
 "set colorcolumn=80
+=======
+>>>>>>> 3f1da7c3caf4b7462ee5715984cb7a5b9e96c987
 set foldmethod=indent
 
 " zencoding configurations
@@ -98,10 +101,18 @@ let g:user_zen_settings = {
 \}
 let g:user_zen_expandabbr_key = '<c-e>'
 
+<<<<<<< HEAD
 au FileType c set makeprg=gcc\ %
 au FileType cpp set makeprg=g++\ %
 
 nnoremap <F5> :GundoToggle<CR>
 
 let g:Powerline_symbols = 'fancy'
+=======
+" enable rainbow parentheses
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+>>>>>>> 3f1da7c3caf4b7462ee5715984cb7a5b9e96c987
 
