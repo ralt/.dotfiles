@@ -1,0 +1,19 @@
+[user]
+    name = Florian Margaine
+    email = florian@margaine.com
+
+[alias]
+    s = status
+    ci = commit
+    co = checkout
+    b = branch
+    a = add
+    p = push
+
+[color]
+    branch = auto
+    diff = auto
+    interactive = auto
+    status = auto
+    ui = auto
+

@@ -1,24 +1,11 @@
 cd ~
 
-# Git config
-git config --global alias.s status
-git config --global alias.ci commit
-git config --global alias.co checkout
-git config --global alias.b branch
-git config --global alias.a add
-git config --global alias.p push
-git config --global user.name "Florian Margaine"
-git config --global user.email florian@margaine.com
-git config --global color.branch auto
-git config --global color.diff auto
-git config --global color.interactive auto
-git config --global color.status auto
-
 # Symbolic links
 ln -s .dotfiles/vimrc .vimrc
 ln -s .dotfiles/vim .vim
 ln -s .dotfiles/tmux.conf .tmux.conf
 ln -s .dotfiles/jshintrc .jshintrc
+ln -s .dotfiles/gitconfig .gitconfig
 
 # Dependencies
 sudo apt-get install curl tmux mercurial python-dev ruby-dev linux-headers-$(uname -r) g++ make
