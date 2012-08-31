@@ -18,6 +18,7 @@ git config --global color.status auto
 ln -s config-files/vimrc .vimrc
 ln -s config-files/vim .vim
 ln -s config-files/tmux.conf .tmux.conf
+ln -s config-files/jshintrc .jshintrc
 
 # Dependencies
 sudo apt-get install curl tmux mercurial python-dev ruby-dev linux-headers-$(uname -r) g++ make
