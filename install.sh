@@ -15,10 +15,10 @@ git config --global color.interactive auto
 git config --global color.status auto
 
 # Symbolic links
-ln -s config-files/vimrc .vimrc
-ln -s config-files/vim .vim
-ln -s config-files/tmux.conf .tmux.conf
-ln -s config-files/jshintrc .jshintrc
+ln -s .dotfiles/vimrc .vimrc
+ln -s .dotfiles/vim .vim
+ln -s .dotfiles/tmux.conf .tmux.conf
+ln -s .dotfiles/jshintrc .jshintrc
 
 # Dependencies
 sudo apt-get install curl tmux mercurial python-dev ruby-dev linux-headers-$(uname -r) g++ make
