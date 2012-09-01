@@ -128,3 +128,5 @@ au Syntax * RainbowParenthesesLoadBraces
 let g:ctrlp_map = '<Leader>t'
 nnoremap <Leader>b :CtrlPBuffer<CR>
 
+set colorcolumn=80
+
