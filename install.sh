@@ -10,7 +10,7 @@ ln -s .dotfiles/jshintrc .jshintrc
 ln -s .dotfiles/gitconfig .gitconfig
 
 # Dependencies
-sudo apt-get install curl tmux mercurial python-dev ruby-dev linux-headers-$(uname -r) g++ make
+sudo apt-get install curl tmux mercurial python-dev ruby-dev g++ make
 
 # Vim
 hg clone https://vim.googlecode.com/hg/ vim
@@ -32,5 +32,5 @@ cd ~
 rm -rf node/
 
 # Npm modules
-sudo npm install -g jshint browserify
+sudo npm install -g jshint browserify uglify-js
 
