@@ -78,14 +78,11 @@ nnoremap <C-L> :call g:ToggleNuMode()<cr>
 au BufNewFile,BufRead *.md set filetype=markdown
 " Drupal specific settings
 au BufNewFile,BufRead *.module set filetype=php
-au BufNewFile,BufRead *.module set shiftwidth=2
 au BufNewFile,BufRead *.install set filetype=php
-au BufNewFile,BufRead *.install set shiftwidth=2
 au BufNewFile,BufRead *.test set filetype=php
-au BufNewFile,BufRead *.test set shiftwidth=2
 au BufNewFile,BufRead *.admin.inc set filetype=php
-au BufNewFile,BufRead *.admin.inc set shiftwidth=2
 au BufNewFile,BufRead *.json set filetype=javascript
+au BufReadPost *.module,*.install,*.theme set syntax=php
 
 " Always keep the cursor at the middle
 "set scrolloff=1000
@@ -129,4 +126,9 @@ let g:ctrlp_map = '<Leader>t'
 nnoremap <Leader>b :CtrlPBuffer<CR>
 
 set colorcolumn=80
+
+" taglist settings
+let g:Tlist_Ctags_Winwidth = 0
+nnoremap <Leader>l :TlistToggle<CR>
+let g:Tlist_Auto_Open = 1
 

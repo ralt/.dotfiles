@@ -354,10 +354,8 @@ client.add_signal("focus", function(c) c.border_color = beautiful.border_focus e
 client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 awful.util.spawn_with_shell("nm-applet")
-awful.util.spawn_with_shell("dropbox start")
 awful.util.spawn_with_shell("skype")
 awful.util.spawn_with_shell("gnome-sound-applet")
 awful.util.spawn_with_shell("gnome-settings-daemon")
 awful.util.spawn_with_shell("xautolock -time 5")
-awful.util.spawn_with_shell("touchegg")
-awful.util.spawn_with_shell("parcellite")
+awful.util.spawn_with_shell("set_resolution")
