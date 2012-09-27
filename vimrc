@@ -132,3 +132,17 @@ let g:Tlist_Ctags_Winwidth = 0
 nnoremap <Leader>l :TlistToggle<CR>
 let g:Tlist_Auto_Open = 1
 
+"php complete
+inoremap ² <C-x><C-o>
+
+" Close taglist if it's the only left
+fun! NoExistingBuffersLeft()
+    if tabpagenr("$") == 1 && winnr("$") == 1
+        if bufname(winbufnr(1)) == "__Tag_List__"
+            quit
+        endif
+    endif
+endfun
+
+au WinEnter * call NoExistingBuffersLeft()<CR>
+
