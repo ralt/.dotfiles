@@ -144,5 +144,5 @@ fun! NoExistingBuffersLeft()
     endif
 endfun
 
-au WinEnter * call NoExistingBuffersLeft()<CR>
+au WinEnter * call NoExistingBuffersLeft()
 
