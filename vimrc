@@ -78,9 +78,13 @@ nnoremap <C-L> :call g:ToggleNuMode()<cr>
 au BufNewFile,BufRead *.md set filetype=markdown
 " Drupal specific settings
 au BufNewFile,BufRead *.module set filetype=php
+au BufNewFile,BufRead *.module set shiftwidth=2
 au BufNewFile,BufRead *.install set filetype=php
+au BufNewFile,BufRead *.install set shiftwidth=2
 au BufNewFile,BufRead *.test set filetype=php
-au BufNewFile,BufRead *.admin.inc set filetype=php
+au BufNewFile,BufRead *.test set shiftwidth=2
+au BufNewFile,BufRead *.inc set filetype=php
+au BufNewFile,BufRead *.inc set shiftwidth=2
 au BufNewFile,BufRead *.json set filetype=javascript
 au BufReadPost *.module,*.install,*.theme set syntax=php
 
@@ -144,5 +148,7 @@ fun! NoExistingBuffersLeft()
     endif
 endfun
 
-au WinEnter * call NoExistingBuffersLeft()<CR>
+au WinEnter * call NoExistingBuffersLeft()
+
+let g:syntastic_phpcs_conf=" --standard=Drupal --extensions=php,module,inc,install,test,profile,theme"
 
