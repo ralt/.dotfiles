@@ -1,19 +1,24 @@
+(require 'package)
+(add-to-list 'package-archives
+	     '("marmalade" .
+	       "http://marmalade-repo.org/packages/") t)
+(package-initialize)
+
 (require 'cl)
 ;; Guarantee all packages are installed on start
 (defvar packages-list
     '(rainbow-mode
-      fill-column-indicator
       clojure-mode
-      highlight-indentation
-      highlight-symbol
       markdown-mode
       php-mode
       drupal-mode
       php-extras
       dsvn
       sr-speedbar
-      magit
-      )
+      auto-complete
+      color-theme
+      rainbow-mode
+      magit)
       "List of packages needs to be installed at launch")
 
 (defun has-package-not-installed ()
@@ -29,11 +34,7 @@
           (dolist (p packages-list)
                 (when (not (package-installed-p p))
                         (package-install p))))
-(require 'package)
-(add-to-list 'package-archives
-	     '("marmalade" .
-	       "http://marmalade-repo.org/packages/") t)
-(package-initialize)
+
 
 ;; Prevent extraneous tabs
 (setq-default indent-tabs-mode nil)
@@ -53,7 +54,11 @@
 (column-number-mode t)
 (global-linum-mode t)
 
+; vim
 (evil-mode)
+
+; #FFF is white
+(rainbow-mode)
 
 ;mute emacs sounds (the annoying beep when reaching EOF)
 ;this is only set on windows, so first check if it exists
@@ -83,5 +88,11 @@
 
 (require 'ido)
 (ido-mode t)
+
+;markdown
+(autoload 'markdown-mode "markdown-mode.el"
+  "Major mode for editing Markdown files" t)
+(setq auto-mode-alist
+      (cons '("\\.md" . markdown-mode) auto-mode-alist))
 
 (setq linum-format "%d ")
