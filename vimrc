@@ -6,6 +6,8 @@ call pathogen#helptags()
 call pathogen#infect("~/.vim/bundle")
 filetype off " Avoid pathogen's bug
 
+colorscheme elflord
+
 " change the mapleader from \ to ,
 let mapleader=","
 
@@ -151,4 +153,3 @@ endfun
 au WinEnter * call NoExistingBuffersLeft()
 
 let g:syntastic_phpcs_conf=" --standard=Drupal --extensions=php,module,inc,install,test,profile,theme"
-
