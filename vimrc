@@ -41,18 +41,25 @@ set visualbell           " don't beep
 set noerrorbells         " don't beep
 set nobackup
 set noswapfile
+
+"necessary for so many stuff
 filetype plugin indent on
 if &t_Co > 2 || has("gui_running")
   " switch syntax highlighting on, when the terminal has colors
   syntax on
 endif
+
+"set background
 set bg=dark
+
+"show trailing spaces
 set list
 set listchars=tab:>.,trail:.,extends:#,nbsp:.
 autocmd filetype html,xml set listchars-=tab:>.
-set pastetoggle=<F2>
+
 " Enable mouse
 set mouse=a
+
 " Disable arrow keys to move around
 map <up> <nop>
 map <down> <nop>
@@ -80,15 +87,17 @@ nnoremap <C-L> :call g:ToggleNuMode()<cr>
 au BufNewFile,BufRead *.md set filetype=markdown
 " Drupal specific settings
 au BufNewFile,BufRead *.module set filetype=php
+au BufNewFile,BufRead *.module set shiftwidth=2
 au BufNewFile,BufRead *.install set filetype=php
+au BufNewFile,BufRead *.install set shiftwidth=2
 au BufNewFile,BufRead *.test set filetype=php
-au BufNewFile,BufRead *.admin.inc set filetype=php
+au BufNewFile,BufRead *.test set shiftwidth=2
+au BufNewFile,BufRead *.inc set filetype=php
+au BufNewFile,BufRead *.inc set shiftwidth=2
 au BufNewFile,BufRead *.json set filetype=javascript
 au BufReadPost *.module,*.install,*.theme set syntax=php
 
-" Always keep the cursor at the middle
-"set scrolloff=1000
-"set colorcolumn=80
+" everything folded when getting in a file
 set foldmethod=indent
 
 " zencoding configurations
@@ -97,13 +106,15 @@ let g:user_zen_settings = {
 \}
 let g:user_zen_expandabbr_key = '<c-e>'
 
+" use the right compiler
 au FileType c set makeprg=gcc\ %
 au FileType cpp set makeprg=g++\ %
 
+"shortcut for gundo
 nnoremap <F5> :GundoToggle<CR>
 
-let g:Powerline_symbols = 'fancy'
 " enable rainbow parentheses
+let g:Powerline_symbols = 'fancy'
 let g:rbpt_colorpairs = [
     \ ['darkgray',    'DarkOrchid3'],
     \ ['darkgreen',   'firebrick3'],
@@ -124,15 +135,18 @@ au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
+" ctrlp conf
 let g:ctrlp_map = '<Leader>t'
 nnoremap <Leader>b :CtrlPBuffer<CR>
 
+" really nice red line at column 80
 set colorcolumn=80
 
 " taglist settings
 let g:Tlist_Ctags_Winwidth = 0
 nnoremap <Leader>l :TlistToggle<CR>
-let g:Tlist_Auto_Open = 1
+"let g:Tlist_Auto_Open = 1
+set tags=./tags,tags;$HOME
 
 "php complete
 inoremap ² <C-x><C-o>
@@ -148,3 +162,5 @@ endfun
 
 au WinEnter * call NoExistingBuffersLeft()
 
+" syntastic conf to use phpcs correctly
+let g:syntastic_phpcs_conf=" --standard=Drupal --extensions=php,module,inc,install,test,profile,theme"

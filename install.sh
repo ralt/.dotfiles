@@ -8,6 +8,9 @@ ln -s .dotfiles/vim .vim
 ln -s .dotfiles/tmux.conf .tmux.conf
 ln -s .dotfiles/jshintrc .jshintrc
 ln -s .dotfiles/gitconfig .gitconfig
+sudo ln -s .dotfiles/drupal_ctags /usr/bin/drupal_ctags
+sudo chmod +x /usr/bin/drupal_ctags
+sudo chmod 777 /usr/bin/drupal_ctags
 
 # Dependencies
 sudo apt-get install curl tmux mercurial python-dev ruby-dev g++ make
