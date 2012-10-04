@@ -18,6 +18,7 @@
       auto-complete
       color-theme
       rainbow-mode
+      slime
       magit)
       "List of packages needs to be installed at launch")
 

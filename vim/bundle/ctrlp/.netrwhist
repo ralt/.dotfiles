@@ -1,10 +1,3 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =8
-let g:netrw_dirhist_1='/lxc/drupal/var/www/drupal/test/dompdf/dompdf/lib'
-let g:netrw_dirhist_2='/lxc/drupal/var/www/drupal/test'
-let g:netrw_dirhist_3='/lxc/drupal/var/www/drupal/test/dompdf/dompdf'
-let g:netrw_dirhist_4='/lxc/drupal/var/www/drupal/test/dompdf/dompdf/include'
-let g:netrw_dirhist_5='/home/flmar/Projects/Maliceo/sshfs/src/sites/all/modules/maliceo/maliceo_commerce'
-let g:netrw_dirhist_6='/home/flmar/Projects/Maliceo/sshfs/src/sites/all/modules/maliceo'
-let g:netrw_dirhist_7='/home/flmar/Projects/Maliceo/sshfs/src/sites/all/modules'
-let g:netrw_dirhist_8='/lxc/maliceo/var/www/maliceo-vente/src/sites/all/modules/commerce_checkout_login'
+let g:netrw_dirhist_cnt =1
+let g:netrw_dirhist_1='/lxc/maliceo/var/www/maliceo-vente/src/sites/all/modules/maliceo/maliceo_commerce'
