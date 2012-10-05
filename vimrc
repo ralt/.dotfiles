@@ -110,9 +110,6 @@ let g:user_zen_expandabbr_key = '<c-e>'
 au FileType c set makeprg=gcc\ %
 au FileType cpp set makeprg=g++\ %
 
-"shortcut for gundo
-nnoremap <F5> :GundoToggle<CR>
-
 " enable rainbow parentheses
 let g:Powerline_symbols = 'fancy'
 let g:rbpt_colorpairs = [
@@ -145,7 +142,11 @@ set colorcolumn=80
 " taglist settings
 let g:Tlist_Ctags_Winwidth = 0
 nnoremap <Leader>l :TlistToggle<CR>
+
+"auto open taglist: no good for projects.
 "let g:Tlist_Auto_Open = 1
+
+" where to looks for tags: recursively up to $HOME
 set tags=./tags,tags;$HOME
 
 "php complete
