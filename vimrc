@@ -169,3 +169,7 @@ let g:syntastic_phpcs_conf=" --standard=Drupal --extensions=php,module,inc,insta
 " NERDTree
 let NERDTreeQuitOnOpen = 1
 nnoremap <Leader>n :NERDTreeToggle<CR>
+
+" jk or kj in insert mode exit the insert mode
+imap jk <C-[>
+imap kj <C-[>
