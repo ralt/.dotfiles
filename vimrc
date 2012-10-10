@@ -143,8 +143,8 @@ set colorcolumn=80
 let g:Tlist_Ctags_Winwidth = 0
 nnoremap <Leader>l :TlistToggle<CR>
 
-"auto open taglist: no good for projects.
-"let g:Tlist_Auto_Open = 1
+"auto open taglist
+let g:Tlist_Auto_Open = 1
 
 " where to looks for tags: recursively up to $HOME
 set tags=./tags,tags;$HOME
@@ -152,7 +152,7 @@ set tags=./tags,tags;$HOME
 "php complete
 inoremap ² <C-x><C-o>
 
-" Close taglist if it's the only left
+" Close taglist or nerdtree if it's the only left
 fun! NoExistingBuffersLeft()
     if tabpagenr("$") == 1 && winnr("$") == 1
         if bufname(winbufnr(1)) == "__Tag_List__"
@@ -165,3 +165,7 @@ au WinEnter * call NoExistingBuffersLeft()
 
 " syntastic conf to use phpcs correctly
 let g:syntastic_phpcs_conf=" --standard=Drupal --extensions=php,module,inc,install,test,profile,theme"
+
+" NERDTree
+let NERDTreeQuitOnOpen = 1
+nnoremap <Leader>n :NERDTreeToggle<CR>
