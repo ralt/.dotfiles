@@ -135,6 +135,7 @@ au Syntax * RainbowParenthesesLoadBraces
 " ctrlp conf
 let g:ctrlp_map = '<Leader>t'
 nnoremap <Leader>b :CtrlPBuffer<CR>
+let g:ctrlp_working_path_mode = 0
 
 " really nice red line at column 80
 set colorcolumn=80
@@ -144,7 +145,7 @@ let g:Tlist_Ctags_Winwidth = 0
 nnoremap <Leader>l :TlistToggle<CR>
 
 "auto open taglist
-let g:Tlist_Auto_Open = 1
+"let g:Tlist_Auto_Open = 1
 
 " where to looks for tags: recursively up to $HOME
 set tags=./tags,tags;$HOME
@@ -173,3 +174,7 @@ nnoremap <Leader>n :NERDTreeToggle<CR>
 " jk or kj in insert mode exit the insert mode
 imap jk <C-[>
 imap kj <C-[>
+
+" noexpandtab for makefiles and gitmodules
+au BufNewFile,BufRead make set noexpandtab
+au BufNewFile,BufRead .gitmodules set noexpandtab

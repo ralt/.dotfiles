@@ -38,3 +38,7 @@
 	path = vim/bundle/csv
 	url = https://github.com/vim-scripts/csv.vim
 	ignore = dirty
+[submodule "vim/bundle/vim-css-color"]
+	path = vim/bundle/vim-css-color
+	url = https://github.com/skammer/vim-css-color
+	ignore = dirty
