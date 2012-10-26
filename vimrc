@@ -179,5 +179,5 @@ imap kj <C-[>
 au BufNewFile,BufRead make set noexpandtab
 au BufNewFile,BufRead .gitmodules set noexpandtab
 
-" slime conf
-let g:slime_target = "tmux"
+" slimv conf
+
