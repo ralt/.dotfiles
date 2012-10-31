@@ -1,2 +1,2 @@
 #!/bin/sh
-ctags --langmap=php:.engine.inc.module.theme.install.php --php-kinds=cdfi --languages=php --recurse
+ctags-exuberant --langmap=php:.engine.inc.module.theme.install.php --php-kinds=cdfi --languages=php --recurse

@@ -151,7 +151,7 @@ nnoremap <Leader>l :TlistToggle<CR>
 set tags=./tags,tags;$HOME
 
 "php complete
-inoremap ² <C-x><C-o>
+"inoremap ² <C-x><C-o>
 
 " Close taglist or nerdtree if it's the only left
 fun! NoExistingBuffersLeft()
@@ -178,3 +178,6 @@ imap kj <C-[>
 " noexpandtab for makefiles and gitmodules
 au BufNewFile,BufRead make set noexpandtab
 au BufNewFile,BufRead .gitmodules set noexpandtab
+
+"Chrome reload
+nnoremap <Leader>r :ChromeReload<CR> :sleep 50m<CR> :redraw!<CR>
