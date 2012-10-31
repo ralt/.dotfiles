@@ -48,3 +48,6 @@
 [submodule "vim/bundle/vcscommand"]
 	path = vim/bundle/vcscommand
 	url = https://github.com/vim-scripts/vcscommand.vim
+[submodule "vim/bundle/slimv"]
+	path = vim/bundle/slimv
+	url = https://github.com/vim-scripts/slimv.vim
