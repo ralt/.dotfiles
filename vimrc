@@ -133,8 +133,8 @@ au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
 " ctrlp conf
-let g:ctrlp_map = '<Leader>t'
-nnoremap <Leader>b :CtrlPBuffer<CR>
+let g:ctrlp_map = '<Leader>w'
+nnoremap <Leader>x :CtrlPBuffer<CR>
 let g:ctrlp_working_path_mode = 0
 
 " really nice red line at column 80
