@@ -181,3 +181,6 @@ au BufNewFile,BufRead .gitmodules set noexpandtab
 
 "Chrome reload
 nnoremap <Leader>r :ChromeReload<CR> :sleep 50m<CR> :redraw!<CR>
+
+" Matching HTML tags
+runtime macros/matchit.vim
