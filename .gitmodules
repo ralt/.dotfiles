@@ -38,6 +38,12 @@
 	path = vim/bundle/vim-css-color
 	url = https://github.com/skammer/vim-css-color
 	ignore = dirty
+[submodule "vim/bundle/vim-browser-reload-linux"]
+	path = vim/bundle/vim-browser-reload-linux
+	url = https://github.com/lordm/vim-browser-reload-linux
+[submodule "vim/bundle/vcscommand"]
+	path = vim/bundle/vcscommand
+	url = https://github.com/vim-scripts/vcscommand.vim
 [submodule "vim/bundle/slimv"]
 	path = vim/bundle/slimv
 	url = https://github.com/vim-scripts/slimv.vim
