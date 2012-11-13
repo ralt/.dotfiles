@@ -34,10 +34,6 @@ sudo make install
 cd ~
 rm -rf node/
 
-# Change the npm prefix
-mkdir .npmroot
-npm set prefix ~/.npmroot
-
 # Npm modules
 npm install -g jshint browserify uglify-js node-gyp
 
