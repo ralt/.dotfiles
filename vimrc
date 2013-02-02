@@ -171,3 +171,5 @@ au BufNewFile,BufRead .gitmodules set noexpandtab
 
 " Matching HTML tags
 runtime macros/matchit.vim
+
+set guifont=Courier\ New:h14
