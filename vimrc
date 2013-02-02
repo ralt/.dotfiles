@@ -133,6 +133,7 @@ set colorcolumn=80
 " taglist settings
 let g:Tlist_Ctags_Winwidth = 0
 nnoremap <Leader>l :TlistToggle<CR>
+let Tlist_Ctags_Cmd = '/usr/local/bin/ctags'
 
 "auto open taglist
 "let g:Tlist_Auto_Open = 1
