@@ -6,7 +6,7 @@ call pathogen#helptags()
 call pathogen#infect("~/.vim/bundle")
 filetype off " Avoid pathogen's bug
 
-colorscheme elflord
+colorscheme solarized
 
 " change the mapleader from \ to ,
 let mapleader=","
@@ -41,6 +41,23 @@ set visualbell           " don't beep
 set noerrorbells         " don't beep
 set nobackup
 set noswapfile
+
+"" Set bundles
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle
+" required!
+Bundle 'gmarik/vundle'
+
+Bundle 'vim-scripts/LycosaExplorer'
+Bundle 'scrooloose/nerdtree'
+Bundle 'Ralt/psettings'
+Bundle 'ervandew/supertab'
+Bundle 'vim-scripts/taglist'
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'mattn/zencoding-vim'
+Bundle 'jelera/vim-javascript-syntax'
 
 "necessary for so many stuff
 filetype plugin indent on
@@ -110,33 +127,6 @@ let g:user_zen_expandabbr_key = '<c-e>'
 au FileType c set makeprg=gcc\ %
 au FileType cpp set makeprg=g++\ %
 
-" enable rainbow parentheses
-let g:Powerline_symbols = 'fancy'
-let g:rbpt_colorpairs = [
-    \ ['darkgray',    'DarkOrchid3'],
-    \ ['darkgreen',   'firebrick3'],
-    \ ['darkcyan',    'RoyalBlue3'],
-    \ ['darkred',     'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['brown',       'firebrick3'],
-    \ ['gray',        'RoyalBlue3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['darkgreen',   'RoyalBlue3'],
-    \ ['brown',       'RoyalBlue3'],
-    \ ['darkcyan',    'SeaGreen3'],
-    \ ['darkred',     'DarkOrchid3'],
-    \ ['red',         'firebrick3'],
-    \ ]
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
-
-" ctrlp conf
-let g:ctrlp_map = '<Leader>w'
-nnoremap <Leader>x :CtrlPBuffer<CR>
-let g:ctrlp_working_path_mode = 0
-
 " really nice red line at column 80
 set colorcolumn=80
 
@@ -178,9 +168,6 @@ imap kj <C-[>
 " noexpandtab for makefiles and gitmodules
 au BufNewFile,BufRead make set noexpandtab
 au BufNewFile,BufRead .gitmodules set noexpandtab
-
-"Chrome reload
-nnoremap <Leader>r :ChromeReload<CR> :sleep 50m<CR> :redraw!<CR>
 
 " Matching HTML tags
 runtime macros/matchit.vim
