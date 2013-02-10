@@ -59,6 +59,7 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'mattn/zencoding-vim'
 Bundle 'jelera/vim-javascript-syntax'
 Bundle 'vim-scripts/cscope.vim'
+Bundle 'vim-scripts/Conque-Shell'
 
 "necessary for so many stuff
 filetype plugin indent on
