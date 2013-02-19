@@ -66,6 +66,9 @@ filetype plugin indent on
 if &t_Co > 2 || has("gui_running")
   " switch syntax highlighting on, when the terminal has colors
   syntax on
+  set go-=m
+  set go-=T
+  set go-=r
 endif
 
 "set background
@@ -175,4 +178,4 @@ au BufNewFile,BufRead .gitmodules set noexpandtab
 " Matching HTML tags
 runtime macros/matchit.vim
 
-set guifont=Courier\ New:h14
+set guifont=Andale\ Mono\ 14
