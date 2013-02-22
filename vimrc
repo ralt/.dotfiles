@@ -60,6 +60,7 @@ Bundle 'mattn/zencoding-vim'
 Bundle 'jelera/vim-javascript-syntax'
 Bundle 'vim-scripts/cscope.vim'
 Bundle 'vim-scripts/Conque-Shell'
+Bundle 'vim-scripts/EasyGrep'
 
 "necessary for so many stuff
 filetype plugin indent on
@@ -179,3 +180,8 @@ au BufNewFile,BufRead .gitmodules set noexpandtab
 runtime macros/matchit.vim
 
 set guifont=Andale\ Mono\ 14
+
+set noerrorbells visualbell t_vb=
+if has('autocmd')
+  autocmd GUIEnter * set visualbell t_vb=
+endif
