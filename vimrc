@@ -62,6 +62,7 @@ Bundle 'vim-scripts/cscope.vim'
 Bundle 'vim-scripts/Conque-Shell'
 Bundle 'vim-scripts/EasyGrep'
 Bundle 'vim-scripts/slimv.vim'
+Bundle 'tpope/vim-commentary'
 
 "necessary for so many stuff
 filetype plugin indent on
@@ -186,3 +187,8 @@ set noerrorbells visualbell t_vb=
 if has('autocmd')
   autocmd GUIEnter * set visualbell t_vb=
 endif
+
+let g:EasyGrepRecursive=1
+let g:EasyGrepCommand=1
+
+let g:ConqueTerm_Color=1
