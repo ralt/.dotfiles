@@ -61,6 +61,7 @@ Bundle 'jelera/vim-javascript-syntax'
 Bundle 'vim-scripts/cscope.vim'
 Bundle 'vim-scripts/Conque-Shell'
 Bundle 'vim-scripts/EasyGrep'
+Bundle 'vim-scripts/slimv.vim'
 
 "necessary for so many stuff
 filetype plugin indent on
