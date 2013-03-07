@@ -6,7 +6,7 @@ call pathogen#helptags()
 call pathogen#infect("~/.vim/bundle")
 filetype off " Avoid pathogen's bug
 
-colorscheme solarized
+colorscheme elflord
 
 " change the mapleader from \ to ,
 let mapleader=","
@@ -191,3 +191,6 @@ let g:EasyGrepRecursive=1
 let g:EasyGrepCommand=1
 
 let g:ConqueTerm_Color=1
+
+" <Ctrl-l> redraws the screen and removes any search highlighting.
+nnoremap <silent> <Leader>r :nohl<CR><C-l>
