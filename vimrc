@@ -59,10 +59,11 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'mattn/zencoding-vim'
 Bundle 'jelera/vim-javascript-syntax'
 Bundle 'vim-scripts/cscope.vim'
-Bundle 'vim-scripts/Conque-Shell'
 Bundle 'vim-scripts/EasyGrep'
 Bundle 'vim-scripts/slimv.vim'
 Bundle 'tpope/vim-commentary'
+Bundle 'flazz/vim-colorschemes'
+Bundle 'Lokaltog/powerline'
 
 "necessary for so many stuff
 filetype plugin indent on
@@ -195,3 +196,7 @@ let g:ConqueTerm_Color=1
 
 " <Ctrl-l> redraws the screen and removes any search highlighting.
 nnoremap <silent> <Leader>r :nohl<CR><C-l>
+
+set laststatus=2
+
+set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
