@@ -64,6 +64,7 @@ Bundle 'vim-scripts/slimv.vim'
 Bundle 'tpope/vim-commentary'
 Bundle 'flazz/vim-colorschemes'
 Bundle 'Lokaltog/powerline'
+Bundle 'vim-scripts/IndexedSearch'
 
 "necessary for so many stuff
 filetype plugin indent on
@@ -87,10 +88,10 @@ autocmd filetype html,xml set listchars-=tab:>.
 set mouse=a
 
 " Disable arrow keys to move around
-map <up> <nop>
-map <down> <nop>
-map <left> <nop>
-map <right> <nop>
+"map <up> <nop>
+"map <down> <nop>
+"map <left> <nop>
+"map <right> <nop>
 " Easy window navigation
 map <C-h> <C-w>h
 map <C-j> <C-w>j
