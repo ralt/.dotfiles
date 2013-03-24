@@ -8,6 +8,10 @@ ln -s .dotfiles/vim .vim
 ln -s .dotfiles/tmux.conf .tmux.conf
 ln -s .dotfiles/jshintrc .jshintrc
 ln -s .dotfiles/gitconfig .gitconfig
+ln -s .dotfiles/xmonad/.xsession .xsession
+ln -s .dotfiles/xmonad/.xmonad .xmonad
+ln -s .dotfiles/xmonad/.xmobarrc .xmobarrc
+ln -s .dotfiles/xmonad/.Xresources .Xresources
 sudo ln -s .dotfiles/drupal_ctags /usr/bin/drupal_ctags
 sudo chmod +x /usr/bin/drupal_ctags
 sudo chmod 777 /usr/bin/drupal_ctags
