@@ -17,3 +17,5 @@
     status = auto
     ui = auto
 
+[push]
+	default = simple

@@ -13,10 +13,10 @@ require("debian.menu")
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
-beautiful.init("/home/florian/.config/awesome/themes/default/theme.lua")
+beautiful.init("/usr/share/awesome/themes/default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "uxterm"
+terminal = "gnome-terminal"
 editor = os.getenv("EDITOR") or "editor"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -353,9 +353,4 @@ end)
 client.add_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
-awful.util.spawn_with_shell("nm-applet")
-awful.util.spawn_with_shell("skype")
-awful.util.spawn_with_shell("gnome-sound-applet")
-awful.util.spawn_with_shell("gnome-settings-daemon")
 awful.util.spawn_with_shell("xautolock -time 5")
-awful.util.spawn_with_shell("set_resolution")

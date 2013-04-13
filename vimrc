@@ -50,7 +50,8 @@ call vundle#rc()
 " required!
 Bundle 'gmarik/vundle'
 
-Bundle 'vim-scripts/LycosaExplorer'
+Bundle 'kien/ctrlp.vim'
+Bundle 'joonty/vdebug'
 Bundle 'scrooloose/nerdtree'
 Bundle 'Ralt/psettings'
 Bundle 'ervandew/supertab'
@@ -201,3 +202,13 @@ nnoremap <silent> <Leader>r :nohl<CR><C-l>
 set laststatus=2
 
 set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+
+" show indented wrapped lines
+set showbreak=-------->
+
+" ctrlp features
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 'ra'
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
