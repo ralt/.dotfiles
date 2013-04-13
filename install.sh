@@ -8,11 +8,7 @@ ln -s .dotfiles/vim .vim
 ln -s .dotfiles/tmux.conf .tmux.conf
 ln -s .dotfiles/jshintrc .jshintrc
 ln -s .dotfiles/gitconfig .gitconfig
-ln -s .dotfiles/xmonad/.xsession .xsession
-ln -s .dotfiles/xmonad/.xmonad .xmonad
-ln -s .dotfiles/xmonad/.xmobarrc .xmobarrc
-ln -s .dotfiles/xmonad/.Xresources .Xresources
-sudo ln -s .dotfiles/drupal_ctags /usr/bin/drupal_ctags
+sudo cp .dotfiles/drupal_ctags /usr/bin
 sudo chmod +x /usr/bin/drupal_ctags
 sudo chmod 777 /usr/bin/drupal_ctags
 
@@ -31,7 +27,7 @@ rm -rf vim/
 # Node.js
 git clone https://github.com/joyent/node.git
 cd node/
-git checkout origin/v0.8.8-release
+git checkout origin/v0.10.3-release
 ./configure
 make
 sudo make install

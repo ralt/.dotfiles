@@ -6,7 +6,7 @@ call pathogen#helptags()
 call pathogen#infect("~/.vim/bundle")
 filetype off " Avoid pathogen's bug
 
-colorscheme blackbeauty
+colorscheme elflord
 
 " change the mapleader from \ to ,
 let mapleader=","
