@@ -97,3 +97,11 @@ ls ../drupal/sites/all/modules/custom/cultura_breadcrumb/
 fab dev cache_clear
 fab dev cache_clear
 killall emacs
+source .bashrc
+vn ci
+svn ci
+cd lxc/
+ls
+cd cultura/var/www/cultura_trunk_svn/
+ls
+svn ci

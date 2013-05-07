@@ -2,9 +2,9 @@
 ;; Automatically generated file!!! DO NOT EDIT!!!
 
 (setq url-cookie-storage
- '(("marmalade-repo.org"
-  [url-cookie "httpOnly" nil "Fri, 03 May 2013 11:27:34 GMT" "/" "marmalade-repo.org" nil]
-  [url-cookie "connect.sid" "L7CBQ0JhSO1iiFPM5ooUaQcI.Ju2%2BtVEAw7YO6MsxmqW8OyhqsXClO0Nrep3r5wRvgmU" "Fri, 03 May 2013 11:27:34 GMT" "/" "marmalade-repo.org" nil]))
+ '((".php.net"
+  [url-cookie "COUNTRY" "NA%2C82.66.177.44" "10-May-2013 15:20:26.00 GMT" "/" ".php.net" nil]
+  [url-cookie "LAST_LANG" "en" "03-May-2014 15:32:26.00 GMT" "/" ".php.net" nil]))
 )
 (setq url-cookie-secure-storage
  'nil)
