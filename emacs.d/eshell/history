@@ -97,3 +97,25 @@ ls ../drupal/sites/all/modules/custom/cultura_breadcrumb/
 fab dev cache_clear
 fab dev cache_clear
 killall emacs
+cd quicklisp/local-projects/
+ls
+git clone git@github.com:Ralt/mdtransform.git
+vim system-index.txt 
+cd mdtransform/
+ls
+make
+cd
+cd Downloads/
+ls
+ls
+tar jxf sbcl-1.1.7-source.tar.bz2
+cd sbcl-1.1.7/
+ls
+sh make.sh 
+cd Workspaces/
+ls
+cd gettingstartedwithcommonlisp/
+ls
+git checkout -b merge-2
+git pull https://github.com/samebchase/gettingstartedwithcommonlisp.git
+git diff
