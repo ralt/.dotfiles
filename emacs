@@ -79,6 +79,25 @@
 (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
 (add-hook 'scheme-mode-hook           #'enable-paredit-mode)
 
+<<<<<<< HEAD
+=======
+(require 'ace-jump-mode)
+(define-key global-map (kbd "C-c SPC") 'ace-jump-char-mode)
+;;
+;; enable a more powerful jump back function from ace jump mode
+;;
+(autoload
+  'ace-jump-mode-pop-mark
+  "ace-jump-mode"
+  "Ace jump back:-)"
+  t)
+(eval-after-load "ace-jump-mode"
+  '(ace-jump-mode-enable-mark-sync))
+(define-key global-map (kbd "C-x SPC") 'ace-jump-mode-pop-mark)
+
+(put 'scroll-left 'disabled nil)
+
+>>>>>>> b37f57c1523415c7d0195bd9d4f7b0dd03afc58d
 (show-paren-mode t)
 
 (require 'tls)
@@ -149,9 +168,15 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+<<<<<<< HEAD
+ '(browse-url-browser-function (quote browse-url-default-browser))
+ '(custom-safe-themes (quote ("1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" "fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" default)))
+ '(ecb-auto-activate t))
+=======
  '(custom-safe-themes (quote ("1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" "fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" default)))
  '(jabber-alert-message-hooks (quote (jabber-message-awesome libnotify-jabber-notify jabber-message-echo jabber-message-scroll)))
  '(jabber-alert-presence-hooks nil))
+>>>>>>> db2159d99e251a2ae3bceb530401f67610824827
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -208,6 +233,17 @@
             (message desc)
           (message "Could not extract function info. Press M-F1 to go the description."))))
     (kill-buffer buf)))
+<<<<<<< HEAD
+
+(require 'popwin)
+(popwin-mode 1)
+
+(require 'multiple-cursors)
+(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+=======
 (put 'upcase-region 'disabled nil)
 
 
@@ -232,6 +268,7 @@
 (add-hook 'jabber-alert-message-hooks 'libnotify-jabber-notify)
 
 (when (fboundp 'winner-mode)
+<<<<<<< HEAD
   (winner-mode 1))
 
 (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
@@ -253,3 +290,7 @@
 (eval-after-load "ace-jump-mode"
   '(ace-jump-mode-enable-mark-sync))
 (define-key global-map (kbd "C-x SPC") 'ace-jump-mode-pop-mark)
+=======
+  (winner-mode 1)
+>>>>>>> db2159d99e251a2ae3bceb530401f67610824827
+>>>>>>> b37f57c1523415c7d0195bd9d4f7b0dd03afc58d
