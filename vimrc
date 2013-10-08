@@ -6,7 +6,7 @@ call pathogen#helptags()
 call pathogen#infect("~/.vim/bundle")
 filetype off " Avoid pathogen's bug
 
-colorscheme elflord
+se t_Co=16
 
 " change the mapleader from \ to ,
 let mapleader=","
@@ -21,7 +21,7 @@ set backspace=indent,eol,start
                   " allow backspacing over everything in insert mode
 set autoindent    " always set autoindenting on
 set copyindent    " copy the previous indentation on autoindenting
-set number        " always show line numbers
+" set number        " always show line numbers
 set shiftwidth=4  " number of spaces to use for autoindenting
 set shiftround    " use multiple of shiftwidth when indenting with '<' and '>'
 set showmatch     " set show matching parenthesis
@@ -50,7 +50,6 @@ call vundle#rc()
 " required!
 Bundle 'gmarik/vundle'
 
-Bundle 'kien/ctrlp.vim'
 Bundle 'joonty/vdebug'
 Bundle 'scrooloose/nerdtree'
 Bundle 'Ralt/psettings'
@@ -60,12 +59,13 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'mattn/zencoding-vim'
 Bundle 'jelera/vim-javascript-syntax'
 Bundle 'vim-scripts/cscope.vim'
-Bundle 'vim-scripts/EasyGrep'
 Bundle 'vim-scripts/slimv.vim'
 Bundle 'tpope/vim-commentary'
 Bundle 'flazz/vim-colorschemes'
-Bundle 'Lokaltog/powerline'
-Bundle 'vim-scripts/IndexedSearch'
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'bling/vim-airline'
+Bundle 'mileszs/ack.vim'
+Bundle 'kien/ctrlp.vim'
 
 "necessary for so many stuff
 filetype plugin indent on
@@ -138,6 +138,10 @@ let g:user_zen_expandabbr_key = '<c-e>'
 au FileType c set makeprg=gcc\ %
 au FileType cpp set makeprg=g++\ %
 
+" svn
+au FileType svn set wrap
+au FileType svn set tw=72
+
 " really nice red line at column 80
 set colorcolumn=80
 
@@ -206,11 +210,21 @@ set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 " show indented wrapped lines
 set showbreak=-------->
 
-" ctrlp features
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_working_path_mode = ''
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
 
 set nopaste
+
+" Use pman for PHP keywords using K
+autocmd FileType php set keywordprg=pman
+
+fun! Fab( arg )
+    execute '!. ~/.cddeploy ' . a:arg
+endfunc
+command! -nargs=1 Fab call Fab(<f-args>)
+
+colorscheme elflord
+
+nnoremap <Leader>p :<C-u>CtrlP<CR>
+nnoremap <Leader>b :<C-u>CtrlPBuffer<CR>
+nnoremap <Leader>r :<C-u>CtrlPMRU<CR>

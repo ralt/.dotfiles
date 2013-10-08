@@ -1,29 +1,3 @@
-ls
-cddeploy
-source ~/.bashrc
-cd ..
-cd ..
-cd ..
-cd ..
-cd ..
-cd ..
-cd ..
-cd cultura/
-ls
-cd deploy/
-ls
-fab dev restart_varnish
-fab dev cache_clear
-ssh root@cultura.lxc
-fab dev cache_clear
-fab dev enable_module:cultura_breadcrumb
-cd ..
-cd scripts/
-ls
-cd dev_utils/
-ls
-cd ..
-cd ..
 cd drupal/scripts/
 ls
 sh backup.sh 
@@ -105,3 +79,50 @@ ls
 cd cultura/var/www/cultura_trunk_svn/
 ls
 svn ci
+cd ..
+cd ..
+cd ..
+cd ..
+cd deploy/
+ls
+svn revert -R ../src
+svn up ../src
+fab dev update_dev
+fab dev reconfigure
+fab dev fix_perms reconfigure
+fab dev fix_perms reconfigure cache_clear
+fab dev cache_clear
+su
+sudo chmod -R 777 .
+cd ..
+cd ..
+cd ..
+cd ..
+cd ..
+ctags -e .
+ctags --help
+ctags -R .
+ctags .
+ctags -R *.module *.php
+ctags -e -R *.module *.php
+find . | grep ".*\.\(hh\|hxx\|cc\)" | xargs etags -f TAGS
+find . | grep ".*\.\(inc\|php\|module\)" | xargs etags -f TAGS
+ssh root@carrefour-recette.vitry.intranet
+ssh root@carrefour-recette.vitry.intranet
+ssh root@carrefour-recette.vitry.intranet
+cd ..
+cd ..
+cd ..
+cd ..
+cd ..
+cd cera-labs/var/www/cera-labs/deploy/
+fab integration update_int
+fab integration update_int
+fab integration cache_clear
+fab integration update_int
+fab integration cache_clear
+fab integration cache_clear
+fab integration update_int
+fab integration update_int
+fab integration update_int
+fab integration cache_clear

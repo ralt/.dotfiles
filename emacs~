@@ -235,3 +235,6 @@
              text)))
 
 (add-hook 'jabber-alert-message-hooks 'libnotify-jabber-notify)
+
+(when (fboundp 'winner-mode)
+  (winner-mode 1)

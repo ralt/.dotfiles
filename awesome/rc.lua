@@ -47,10 +47,16 @@ layouts =
 
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
-tags = {}
+tags = {
+    settings = {
+        { names = { "Euanthe", "Orthosie", "Chaldene", "Mneme", "Thyone", "Ananke", "Herse", "Taygete", "Aoede" } },
+        { names = { "Eurydome", "Cyllene", "Sinope", "Erinome", "Themisto", "Metis", "Amalthea", "Lysithea", "Thelxinoe" } }
+    }
+}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, s, layouts[1])
+    ---tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, s, layouts[1])
+    tags[s] = awful.tag(tags.settings[s].names, s, layouts[1])
 end
 -- }}}
 
@@ -310,6 +316,8 @@ awful.rules.rules = {
                      border_color = beautiful.border_normal,
                      focus = true,
                      keys = clientkeys,
+                     maximized_vertical   = false,
+                     maximized_horizontal = false,
                      buttons = clientbuttons } },
     { rule = { class = "MPlayer" },
       properties = { floating = true } },
@@ -353,9 +361,10 @@ end)
 client.add_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
-awful.util.spawn_with_shell("skype")
 awful.util.spawn_with_shell("gnome-sound-applet")
 awful.util.spawn_with_shell("gnome-settings-daemon")
 awful.util.spawn_with_shell("nm-applet")
 awful.util.spawn_with_shell("set_resolution")
 awful.util.spawn_with_shell("setkeyboard")
+awful.util.spawn_with_shell("jitsi")
+

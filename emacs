@@ -79,11 +79,6 @@
 (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
 (add-hook 'scheme-mode-hook           #'enable-paredit-mode)
 
-(add-to-list 'load-path "which-folder-ace-jump-mode-file-in/")
-(require 'ace-jump-mode)
-(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
-(put 'scroll-left 'disabled nil)
-
 (show-paren-mode t)
 
 (require 'tls)
@@ -177,7 +172,7 @@
 (setq x-select-enable-clipboard t)
 (setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
 
-(load-theme 'solarized-dark t)
+(load-theme 'solarized-light t)
 
 (add-hook 'php-mode-hook 'my-php-mode-stuff)
 
@@ -237,4 +232,24 @@
 (add-hook 'jabber-alert-message-hooks 'libnotify-jabber-notify)
 
 (when (fboundp 'winner-mode)
-  (winner-mode 1)
+  (winner-mode 1))
+
+(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+
+(require 'ace-jump-mode)
+(define-key global-map (kbd "C-c SPC") 'ace-jump-char-mode)
+;;
+;; enable a more powerful jump back function from ace jump mode
+;;
+(autoload
+  'ace-jump-mode-pop-mark
+  "ace-jump-mode"
+  "Ace jump back:-)"
+  t)
+(eval-after-load "ace-jump-mode"
+  '(ace-jump-mode-enable-mark-sync))
+(define-key global-map (kbd "C-x SPC") 'ace-jump-mode-pop-mark)
