@@ -49,11 +49,9 @@ call vundle#rc()
 " required!
 Bundle 'gmarik/vundle'
 
-Bundle 'joonty/vdebug'
 Bundle 'scrooloose/nerdtree'
 Bundle 'Ralt/psettings'
 Bundle 'ervandew/supertab'
-Bundle 'vim-scripts/taglist.vim'
 Bundle 'mattn/zencoding-vim'
 Bundle 'jelera/vim-javascript-syntax'
 Bundle 'vim-scripts/slimv.vim'
@@ -62,6 +60,8 @@ Bundle 'flazz/vim-colorschemes'
 Bundle 'bling/vim-airline'
 Bundle 'mileszs/ack.vim'
 Bundle 'kien/ctrlp.vim'
+Bundle 'techlivezheng/vim-plugin-minibufexpl'
+Bundle 'majutsushi/tagbar'
 
 "necessary for so many stuff
 filetype plugin indent on
@@ -113,10 +113,7 @@ au FileType svn set tw=72
 " really nice red line at column 80
 set colorcolumn=80
 
-" taglist settings
-let g:Tlist_Ctags_Winwidth = 0
-nnoremap <Leader>l :TlistToggle<CR>
-let Tlist_Ctags_Cmd = '/usr/local/bin/ctags'
+nnoremap <Leader>l :TagbarToggle<CR>
 
 " where to looks for tags: recursively up to $HOME
 set tags=./tags,tags;$HOME
