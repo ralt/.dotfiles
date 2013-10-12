@@ -26,7 +26,7 @@ set smartcase     " ignore case if search pattern is all lowercase,
 set smarttab      " insert tabs on the start of a line according to
                   "    shiftwidth, not tabstop
 set expandtab
-set hlsearch      " highlight search terms
+"set hlsearch      " highlight search terms
 set incsearch     " show search matches as you type
 set history=1000         " remember more commands and search history
 set undolevels=1000      " use many muchos levels of undo
@@ -60,7 +60,6 @@ Bundle 'flazz/vim-colorschemes'
 Bundle 'bling/vim-airline'
 Bundle 'mileszs/ack.vim'
 Bundle 'kien/ctrlp.vim'
-Bundle 'techlivezheng/vim-plugin-minibufexpl'
 Bundle 'majutsushi/tagbar'
 
 "necessary for so many stuff
