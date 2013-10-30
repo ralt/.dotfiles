@@ -38,8 +38,8 @@ set nobackup
 set noswapfile
 
 " Hybrid line number mode
-set relativenumber
-set number
+"set relativenumber
+"set number
 
 "" Set bundles
 set rtp+=~/.vim/bundle/vundle/
@@ -62,6 +62,7 @@ Bundle 'flazz/vim-colorschemes'
 Bundle 'bling/vim-airline'
 Bundle 'mileszs/ack.vim'
 Bundle 'kien/ctrlp.vim'
+Bundle 'tpope/vim-fugitive'
 
 "necessary for so many stuff
 filetype plugin indent on
@@ -147,7 +148,7 @@ au BufNewFile,BufRead .gitmodules set noexpandtab
 " Matching HTML tags
 runtime macros/matchit.vim
 
-set guifont=Andale\ Mono\ 14
+set guifont=Andale\ Mono\ 10
 
 set noerrorbells visualbell t_vb=
 if has('autocmd')
@@ -179,3 +180,6 @@ colorscheme elflord
 nnoremap <Leader>p :<C-u>CtrlP<CR>
 nnoremap <Leader>b :<C-u>CtrlPBuffer<CR>
 nnoremap <Leader>r :<C-u>CtrlPMRU<CR>
+
+set nornu
+set nonu

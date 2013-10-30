@@ -16,7 +16,7 @@ require("debian.menu")
 beautiful.init("/usr/share/awesome/themes/default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "gnome-terminal"
+terminal = "urxvtc"
 editor = os.getenv("EDITOR") or "editor"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -367,4 +367,4 @@ awful.util.spawn_with_shell("nm-applet")
 awful.util.spawn_with_shell("set_resolution")
 awful.util.spawn_with_shell("setkeyboard")
 awful.util.spawn_with_shell("jitsi")
-
+awful.util.spawn_with_shell("/usr/bin/urxvtd -q -f -o")
