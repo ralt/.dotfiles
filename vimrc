@@ -26,7 +26,7 @@ set smartcase     " ignore case if search pattern is all lowercase,
 set smarttab      " insert tabs on the start of a line according to
                   "    shiftwidth, not tabstop
 set expandtab
-set hlsearch      " highlight search terms
+"set hlsearch      " highlight search terms
 set incsearch     " show search matches as you type
 set history=1000         " remember more commands and search history
 set undolevels=1000      " use many muchos levels of undo
@@ -49,11 +49,9 @@ call vundle#rc()
 " required!
 Bundle 'gmarik/vundle'
 
-Bundle 'joonty/vdebug'
 Bundle 'scrooloose/nerdtree'
 Bundle 'Ralt/psettings'
 Bundle 'ervandew/supertab'
-Bundle 'vim-scripts/taglist.vim'
 Bundle 'mattn/zencoding-vim'
 Bundle 'jelera/vim-javascript-syntax'
 Bundle 'vim-scripts/slimv.vim'
@@ -63,6 +61,7 @@ Bundle 'bling/vim-airline'
 Bundle 'mileszs/ack.vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'tpope/vim-fugitive'
+Bundle 'majutsushi/tagbar'
 
 "necessary for so many stuff
 filetype plugin indent on
@@ -114,10 +113,7 @@ au FileType svn set tw=72
 " really nice red line at column 80
 set colorcolumn=80
 
-" taglist settings
-let g:Tlist_Ctags_Winwidth = 0
-nnoremap <Leader>l :TlistToggle<CR>
-let Tlist_Ctags_Cmd = '/usr/local/bin/ctags'
+nnoremap <Leader>l :TagbarToggle<CR>
 
 " where to looks for tags: recursively up to $HOME
 set tags=./tags,tags;$HOME
