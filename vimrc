@@ -62,6 +62,8 @@ Bundle 'mileszs/ack.vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'majutsushi/tagbar'
+Bundle 'goldfeld/vim-seek'
+Bundle 'ap/vim-css-color'
 
 "necessary for so many stuff
 filetype plugin indent on
@@ -71,6 +73,7 @@ if &t_Co > 2 || has("gui_running")
   set go-=m
   set go-=T
   set go-=r
+  set go-=L
 endif
 
 "set background
@@ -144,7 +147,7 @@ au BufNewFile,BufRead .gitmodules set noexpandtab
 " Matching HTML tags
 runtime macros/matchit.vim
 
-set guifont=Andale\ Mono\ 10
+set guifont=Andale\ Mono:h13
 
 set noerrorbells visualbell t_vb=
 if has('autocmd')
@@ -171,7 +174,7 @@ fun! Fab( arg )
 endfunc
 command! -nargs=1 Fab call Fab(<f-args>)
 
-colorscheme elflord
+colorscheme molokai
 
 nnoremap <Leader>p :<C-u>CtrlP<CR>
 nnoremap <Leader>b :<C-u>CtrlPBuffer<CR>
