@@ -49,7 +49,6 @@ call vundle#rc()
 " required!
 Bundle 'gmarik/vundle'
 
-Bundle 'scrooloose/nerdtree'
 Bundle 'Ralt/psettings'
 Bundle 'ervandew/supertab'
 Bundle 'mattn/zencoding-vim'
@@ -64,6 +63,8 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'majutsushi/tagbar'
 Bundle 'goldfeld/vim-seek'
 Bundle 'ap/vim-css-color'
+Bundle 'junegunn/goyo.vim'
+Bundle 'tpope/vim-vinegar'
 
 "necessary for so many stuff
 filetype plugin indent on
@@ -138,7 +139,6 @@ endfun
 autocmd filetype c set tabstop=8
 autocmd filetype c set noexpandtab
 autocmd filetype c set sw=8
-autocmd filetype c autocmd BufWritePre <buffer> :call KernelIndent()
 
 au WinEnter * call NoExistingBuffersLeft()
 
