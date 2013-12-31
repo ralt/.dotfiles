@@ -49,7 +49,6 @@ call vundle#rc()
 " required!
 Bundle 'gmarik/vundle'
 
-Bundle 'scrooloose/nerdtree'
 Bundle 'Ralt/psettings'
 Bundle 'ervandew/supertab'
 Bundle 'mattn/zencoding-vim'
@@ -63,6 +62,10 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'majutsushi/tagbar'
 Bundle 'jnwhiteh/vim-golang'
+Bundle 'goldfeld/vim-seek'
+Bundle 'ap/vim-css-color'
+Bundle 'junegunn/goyo.vim'
+Bundle 'tpope/vim-vinegar'
 
 "necessary for so many stuff
 filetype plugin indent on
@@ -72,6 +75,7 @@ if &t_Co > 2 || has("gui_running")
   set go-=m
   set go-=T
   set go-=r
+  set go-=L
 endif
 
 "set background
@@ -128,6 +132,15 @@ fun! NoExistingBuffersLeft()
     endif
 endfun
 
+fun! KernelIndent()
+    execute "%!gindent -nbad -bap -nbc -bbo -hnl -br -brs -c33 -cd33 -ncdb -ce -ci4 -cli0 -d0 -di1 -nfc1 -i8 -ip0 -l80 -lp -npcs -nprs -npsl -sai -saf -saw -ncs -nsc -sob -nfca -cp33 -ss -ts8 -il1"
+endfun
+
+" C stuff
+autocmd filetype c set tabstop=8
+autocmd filetype c set noexpandtab
+autocmd filetype c set sw=8
+
 au WinEnter * call NoExistingBuffersLeft()
 
 " NERDTree
@@ -145,7 +158,7 @@ au BufNewFile,BufRead .gitmodules set noexpandtab
 " Matching HTML tags
 runtime macros/matchit.vim
 
-set guifont=Andale\ Mono\ 10
+set guifont=Andale\ Mono:h13
 
 set noerrorbells visualbell t_vb=
 if has('autocmd')
@@ -172,7 +185,7 @@ fun! Fab( arg )
 endfunc
 command! -nargs=1 Fab call Fab(<f-args>)
 
-colorscheme elflord
+colorscheme molokai
 
 nnoremap <Leader>p :<C-u>CtrlP<CR>
 nnoremap <Leader>b :<C-u>CtrlPBuffer<CR>

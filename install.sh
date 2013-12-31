@@ -27,7 +27,7 @@ rm -rf vim/
 # Node.js
 git clone https://github.com/joyent/node.git
 cd node/
-git checkout origin/v0.10.3-release
+git checkout origin/v0.10.24-release
 ./configure
 make
 sudo make install
