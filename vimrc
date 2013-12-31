@@ -62,6 +62,7 @@ Bundle 'mileszs/ack.vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'majutsushi/tagbar'
+Bundle 'jnwhiteh/vim-golang'
 
 "necessary for so many stuff
 filetype plugin indent on
@@ -179,3 +180,22 @@ nnoremap <Leader>r :<C-u>CtrlPMRU<CR>
 
 set nornu
 set nonu
+
+" The Silver Searcher
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
+
+autocmd FileType go autocmd BufWritePre <buffer> Fmt
+
+inoremap {      {}<Left>
+inoremap {<CR>  {<CR>}<Esc>O
+inoremap {{     {
+inoremap {}     {}
