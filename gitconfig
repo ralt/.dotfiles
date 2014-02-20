@@ -1,6 +1,6 @@
 [user]
-    name = Florian Margaine
-    email = florian@margaine.com
+	name = Florian MARGAINE
+	email = florian@margaine.com
 
 [alias]
     s = status
@@ -16,3 +16,5 @@
     interactive = auto
     status = auto
     ui = auto
+[diff]
+	external = git-meld

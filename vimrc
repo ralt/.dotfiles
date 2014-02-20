@@ -26,7 +26,7 @@ set smartcase     " ignore case if search pattern is all lowercase,
 set smarttab      " insert tabs on the start of a line according to
                   "    shiftwidth, not tabstop
 set expandtab
-"set hlsearch      " highlight search terms
+set hlsearch      " highlight search terms
 set incsearch     " show search matches as you type
 set history=1000         " remember more commands and search history
 set undolevels=1000      " use many muchos levels of undo
@@ -66,6 +66,7 @@ Bundle 'goldfeld/vim-seek'
 Bundle 'ap/vim-css-color'
 Bundle 'junegunn/goyo.vim'
 Bundle 'tpope/vim-vinegar'
+Bundle 'tsaleh/vim-matchit'
 
 "necessary for so many stuff
 filetype plugin indent on
@@ -154,11 +155,12 @@ imap kj <C-[>
 " noexpandtab for makefiles and gitmodules
 au BufNewFile,BufRead make set noexpandtab
 au BufNewFile,BufRead .gitmodules set noexpandtab
+autocmd filetype mail set noexpandtab
 
 " Matching HTML tags
 runtime macros/matchit.vim
 
-set guifont=Andale\ Mono:h13
+set guifont=Ubuntu\ Mono\ 13
 
 set noerrorbells visualbell t_vb=
 if has('autocmd')
@@ -185,7 +187,7 @@ fun! Fab( arg )
 endfunc
 command! -nargs=1 Fab call Fab(<f-args>)
 
-colorscheme molokai
+colorscheme solarized
 
 nnoremap <Leader>p :<C-u>CtrlP<CR>
 nnoremap <Leader>b :<C-u>CtrlPBuffer<CR>
@@ -212,3 +214,11 @@ inoremap {      {}<Left>
 inoremap {<CR>  {<CR>}<Esc>O
 inoremap {{     {
 inoremap {}     {}
+
+let g:ctrlp_working_path_mode = ''
+
+nnoremap <leader>. :CtrlPTag<cr>
+
+nnoremap <leader>g :Gstatus<cr>
+
+nnoremap <CR> :noh<CR><CR>
