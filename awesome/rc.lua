@@ -226,6 +226,9 @@ globalkeys = awful.util.table.join(
 
     awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
+    -- Screenshot
+    awful.key({ modkey, }, "q", function () awful.util.spawn("gnome-screenshot -a") end),
+
     -- Prompt
     awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
 
@@ -367,5 +370,5 @@ awful.util.spawn_with_shell("run_once nm-applet")
 awful.util.spawn_with_shell("run_once set_resolution")
 awful.util.spawn_with_shell("setkeyboard")
 awful.util.spawn_with_shell("/usr/bin/urxvtd -q -f -o")
-awful.util.spawn_with_shell("run_once urxvtc")
-awful.util.spawn_with_shell("run_once empathy")
+awful.util.spawn_with_shell("run_once thunar --daemon")
+awful.util.spawn_with_shell("xrdb -merge ~/.Xresources")

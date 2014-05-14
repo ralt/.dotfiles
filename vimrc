@@ -62,11 +62,11 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'majutsushi/tagbar'
 Bundle 'jnwhiteh/vim-golang'
-Bundle 'goldfeld/vim-seek'
 Bundle 'ap/vim-css-color'
 Bundle 'junegunn/goyo.vim'
 Bundle 'tpope/vim-vinegar'
 Bundle 'tsaleh/vim-matchit'
+Bundle 'justinmk/vim-sneak'
 
 "necessary for so many stuff
 filetype plugin indent on
@@ -222,3 +222,5 @@ nnoremap <leader>. :CtrlPTag<cr>
 nnoremap <leader>g :Gstatus<cr>
 
 nnoremap <CR> :noh<CR><CR>
+
+nnoremap <Leader>zz :let &scrolloff=999-&scrolloff<CR>

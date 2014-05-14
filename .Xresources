@@ -2,7 +2,7 @@ URxvt.iconFile: /usr/share/icons/Faenza/apps/scalable/urxvt.svg
 URxvt.transparent: false
 !URxvt.shading: 40  // 0 to 99 darkens, 101 to 200 lightens
 URxvt.scrollBar: off
-URxvt.font: xft:Ubuntu\ Mono:size=11
+URxvt.font: xft:Ubuntu\ Mono:size=12
 URxvt.perl-ext-common:default,matcher,url-select,keyboard-select,clipboard,autocomplete-ALL-the-things,
 URxvt.keysym.M-u:perl:url-select:select_next
 URxvt.keysym.M-slash:  perl:aAtt:complete
