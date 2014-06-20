@@ -1,7 +1,38 @@
+;;;; -*- Mode: Lisp -*-
+
 (in-package :stumpwm)
 
-(setf stumpwm:*screen-mode-line-format*
-      (list "%w | "
-            '(:eval (stumpwm:run-shell-command "date" t))))
+(ql:quickload 'swank)
+(swank-loader:init)
+(defcommand swank () ()
+            (setf stumpwm:*top-level-error-action* :break)
+            (swank:create-server :port 4005
+                                 :style swank:*communication-style*
+                                 :dont-close t)
+            (echo-string (current-screen)
+                         "Starting swank. M-x slime-connect RET RET, then (in-package stumpwm)."))
+(swank)
 
-(stumpwm:set-prefix-key (stumpwm:kbd "C-q"))
+(stumpwm:run-shell-command "sb")
+(stumpwm:run-shell-command "set_resolution")
+
+(mode-line)
+
+;; Turn on the modeline
+(if (not (head-mode-line (current-head)))
+     (toggle-mode-line (current-screen) (current-head)))
+
+;; Show time, cpu usage and network traffic in the modeline
+(setf *screen-mode-line-format*
+      (list '(:eval (run-shell-command "date '+%R, %F %a'|tr -d [:cntrl:]" t)) " [^B%n^b] %W"))
+
+(stumpwm:set-prefix-key (stumpwm:kbd "C-d"))
+
+(defun banish-on-focus (cur last)
+  (declare (ignore last))
+  (multiple-value-bind (x y)
+      (xlib:global-pointer-position *display*)
+    (unless (eq cur (find-frame (current-group) x y))
+      (banish))))
+
+(add-hook *focus-frame-hook* 'banish-on-focus)

@@ -101,7 +101,7 @@
   (erc :server "irc.freenode.net" :port 6667
            :nick "Ralt" :full-name "Ralt"))
 
-(setq erc-autjoin-channels-alist '(("freenode.net" "#lisp" "#promises" "#sojavascript")))
+(setq erc-autojoin-channels-alist '(("freenode.net" "#lisp" "#promises" "#sojavascript")))
 
 (setq starttls-use-gnutls t)
 (setq starttls-gnutls-program "gnutls-cli")
