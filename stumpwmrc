@@ -5,12 +5,12 @@
 (ql:quickload 'swank)
 (swank-loader:init)
 (defcommand swank () ()
-            (setf stumpwm:*top-level-error-action* :break)
-            (swank:create-server :port 4005
-                                 :style swank:*communication-style*
-                                 :dont-close t)
-            (echo-string (current-screen)
-                         "Starting swank. M-x slime-connect RET RET, then (in-package stumpwm)."))
+  (setf stumpwm:*top-level-error-action* :break)
+  (swank:create-server :port 4005
+                       :style swank:*communication-style*
+                       :dont-close t)
+  (echo-string (current-screen)
+               "Starting swank. M-x slime-connect RET RET, then (in-package stumpwm)."))
 (swank)
 
 (stumpwm:run-shell-command "sb")
@@ -36,3 +36,32 @@
       (banish))))
 
 (add-hook *focus-frame-hook* 'banish-on-focus)
+
+(defcommand google-chrome () ()
+  "run google chrome"
+  (run-or-raise "google-chrome" '(:class "Google-chrome")))
+
+(defcommand lock () ()
+  "locks the pc"
+  (run-shell-command "lock"))
+
+(defcommand veille () ()
+  "puts the pc in veille"
+  (run-shell-command "veille"))
+
+(defcommand emacs () ()
+  "run emacs"
+  (run-or-raise "emacs" '(:title "emacs")))
+
+(define-key *top-map* (kbd "M-1") "google-chrome")
+(define-key *top-map* (kbd "M-2") "emacs")
+
+;;; Window Appearance
+;; The width in pixels given to the borders of regular windows.
+(setf *normal-border-width* 0)
+;; The width in pixels given to the borders of windows with maxsize or ratio hints.
+(setf *maxsize-border-width* 0)
+;; The width in pixels given to the borders of transient or pop-up windows.
+(setf *transient-border-width* 0)
+
+(setf *mouse-focus-policy* :sloppy) ;; :click, :ignore, :sloppy
