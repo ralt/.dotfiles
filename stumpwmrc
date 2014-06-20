@@ -1,0 +1,7 @@
+(in-package :stumpwm)
+
+(setf stumpwm:*screen-mode-line-format*
+      (list "%w | "
+            '(:eval (stumpwm:run-shell-command "date" t))))
+
+(stumpwm:set-prefix-key (stumpwm:kbd "C-q"))

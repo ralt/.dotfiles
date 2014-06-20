@@ -1,3 +1,9 @@
+(defvar *projects* (make-hash-table :test 'equal))
+
+(puthash "cso" "/lxc/total-cso/var/www/total-cso" *projects*)
+(puthash "labs" "/lxc/cera-labs/var/www/cera-labs" *projects*)
+(puthash "mpi" "/lxc/cera-mesprojetsimmobiliers/var/www/cera-mesprojetsimmobiliers" *projects*)
+
 (require 'package)
 (add-to-list 'package-archives
          '("marmalade" .
@@ -17,6 +23,7 @@
       ido-better-flex
       paredit
       php-mode
+      restclient
       magit)
       "List of packages needs to be installed at launch")
 
@@ -55,7 +62,7 @@
 (add-hook 'before-save-hook 'whitespace-cleanup)
 
 ;show column number
-;(column-number-mode t)
+(column-number-mode t)
 ;(global-linum-mode t)
 
 ;mute emacs sounds (the annoying beep when reaching EOF)
@@ -93,6 +100,8 @@
   (interactive)
   (erc :server "irc.freenode.net" :port 6667
            :nick "Ralt" :full-name "Ralt"))
+
+(setq erc-autjoin-channels-alist '(("freenode.net" "#lisp" "#promises" "#sojavascript")))
 
 (setq starttls-use-gnutls t)
 (setq starttls-gnutls-program "gnutls-cli")
@@ -149,6 +158,7 @@
 
 (add-to-list 'auto-mode-alist '("\\.\\(module\\|test\\|install\\|theme\\)$" . drupal-mode))
 (add-to-list 'auto-mode-alist '("\\.\\(php\\|inc\\)$" . php-mode))
+(add-to-list 'auto-mode-alist '("\\.tpl\\.php$" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.info" . conf-windows-mode))
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -158,6 +168,7 @@
  '(browse-url-browser-function (quote browse-url-default-browser))
  '(custom-safe-themes (quote ("1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" "fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" default)))
  '(ecb-auto-activate t)
+ '(erc-modules (quote (autojoin button completion fill irccontrols list match menu move-to-prompt netsplit networks noncommands readonly ring services stamp track)))
  '(jabber-alert-message-hooks (quote (jabber-message-awesome libnotify-jabber-notify jabber-message-echo jabber-message-scroll)) t)
  '(jabber-alert-presence-hooks nil))
 
@@ -231,10 +242,6 @@
 
 (global-set-key (kbd "C-c i") 'magit-status)
 
-(defvar *projects* (make-hash-table :test 'equal))
-
-(puthash "cso" "/lxc/total-cso/var/www/total-cso" *projects*)
-(puthash "labs" "/lxc/cera-labs/var/www/cera-labs" *projects*)
 
 (defun goto-project (project)
   (interactive "sEnter project name: ")
@@ -286,3 +293,11 @@
 
 (add-hook 'php-mode-hook (lambda ()
                            (add-hook 'c-special-indent-hook 'unident-closure)))
+
+(setq browse-url-browser-function 'browse-url-generic browse-url-generic-program "google-chrome")
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

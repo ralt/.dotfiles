@@ -1,0 +1,100 @@
+cd
+cd Downloads/
+tar xf auctex-11.87.tar.gz 
+ls
+cd auctex-11.87/
+ls
+./configure
+./configure --with-texmf-dir=$HOME/texmf
+make
+sudo make install
+ls .emacs.d/
+ls .emacs.d/elpa/
+cd
+cd .emacs.d/
+ls
+cd elpa/
+ls
+rm -rf auctex-11.87.3/
+sudo apt-get install ghostscript
+sudo apt-get upgrade
+sudo apt-get install pdfmake
+ls
+rm _region*
+rm *.aux
+make
+make clean
+make
+cd
+cd lxc/cera-labs/var/www/cera-labs/
+cd deploy/
+fab dev restart_varnish
+sudo service apache2 restart
+git log
+git show  1a699616dca
+source ~/.bashrc
+ssh root@total-cso.vitry.intranet
+cd
+cd lxc/total-cso/var/www/total-cso/
+ls
+svn st
+ssh smile@total-cso.lxc
+ssh mpi
+cd cera-mesprojetsimmobiliers:~/cera-mesprojetsimmobiliers
+ssh mpi
+cd
+ssh cso
+ssh cso
+cat .smile_infos.yaml | grep hoareau -C5
+cd /ssh:smile@total-cso.lxc
+cd /ssh:smile@total-cso.lxc:~/
+ls
+cd total-cso/
+ls
+cd
+cd -
+cd ..
+cd ..
+cd ..
+ls
+cd
+cat .smile_infos.yaml | grep hoareau -C5
+cd /ssh:smile@total-cso.lxc:~
+cd total-cso/
+ls
+cd src/
+ls
+cd ../conf/
+ls
+grep -rns 'total-cso-pp'
+grep -rns 'total-cso-pp' .
+grep -rns 'total-cso.smile-hosting.fr' .
+grep -rns 'total-cso-pp' .
+grep -rns 'total-cso.smile-hosting.fr' .
+grep -rns 'total-cso.smile-hosting.fr' .
+grep -rns 'total-cso-pp' .
+grep -rns 'total-cso.smile-hosting.fr' .
+cd ..
+ls
+cd conf/
+svn st
+svn add nginx/nginx.conf__STAGING__ 
+svn add nginx/nginx.conf__PROD__ 
+svn add apache/total-cso.lxc.conf__STAGING__
+svn add apache/total-cso.lxc.conf__PROD__ 
+svn add varnish/default.vcl__PROD__
+svn add varnish/default.vcl__STAGING__ 
+svn add system/crontab__STAGING__
+svn add system/crontab__PROD__ 
+svn st
+svn ci
+svn ci
+svn st
+export EDITOR=nano
+export SVNEDITOR=nano
+svn ci
+export SVN_EDITOR=nano
+sudo apt-get install nano
+apt-get install nano
+echo $SVN_EDITOR
+svn ci

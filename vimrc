@@ -224,3 +224,5 @@ nnoremap <leader>g :Gstatus<cr>
 nnoremap <CR> :noh<CR><CR>
 
 nnoremap <Leader>zz :let &scrolloff=999-&scrolloff<CR>
+
+command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis | wincmd p | diffthis

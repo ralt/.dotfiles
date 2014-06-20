@@ -1,0 +1,13 @@
+;;; fiplr-autoloads.el --- automatically extracted autoloads
+;;
+;;; Code:
+
+
+(provide 'fiplr-autoloads)
+;; Local Variables:
+;; version-control: never
+;; no-byte-compile: t
+;; no-update-autoloads: t
+;; coding: utf-8
+;; End:
+;;; fiplr-autoloads.el ends here
