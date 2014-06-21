@@ -24,6 +24,10 @@
       paredit
       php-mode
       restclient
+      js2-mode
+      autopair
+      web-mode
+      org
       magit)
       "List of packages needs to be installed at launch")
 
@@ -32,14 +36,14 @@
                   when (not (package-installed-p p)) do (return t)
                           finally (return nil)))
 (when (has-package-not-installed)
-    ;; Check for new packages (package versions)
-    (message "%s" "Get latest versions of all packages...")
-      (package-refresh-contents)
-        (message "%s" " done.")
-          ;; Install the missing packages
-          (dolist (p packages-list)
-                (when (not (package-installed-p p))
-                        (package-install p))))
+  ;; Check for new packages (package versions)
+  (message "%s" "Get latest versions of all packages...")
+  (package-refresh-contents)
+  (message "%s" " done.")
+  ;; Install the missing packages
+  (dolist (p packages-list)
+    (when (not (package-installed-p p))
+      (package-install p))))
 
 ;disable annoying GUI
 (tool-bar-mode -1)
@@ -86,7 +90,7 @@
 ;...by any means necessary
 
 (load (expand-file-name "~/quicklisp/slime-helper.el"))
-(setq inferior-lisp-program "sbcl")
+(setq inferior-lisp-program "/usr/local/bin/sbcl")
 
 (ido-mode)
 (setq ido-enable-flex-matching t)
@@ -301,3 +305,13 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+;; paste fix
+(setq interprogram-paste-function 'x-selection-value)
+
+(require 'go-mode-load)
+
+(require 'org)
+(define-key global-map "\C-cl" 'org-store-link)
+(define-key global-map "\C-ca" 'org-agenda)
+(setq org-log-done t)
