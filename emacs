@@ -25,9 +25,15 @@
       php-mode
       restclient
       js2-mode
+      js2-refactor
+      discover
+      discover-js2-refactor
       autopair
       web-mode
       org
+      go-mode
+      fiplr
+      jabber
       magit)
       "List of packages needs to be installed at launch")
 
@@ -319,3 +325,6 @@
 (setq org-log-done t)
 (setq org-default-notes-file "~/Org/notes.org")
 (define-key global-map "\C-cc" 'org-capture)
+(setq org-agenda-files (list "~/Org/work.org"))
+
+(js2r-add-keybindings-with-prefix "C-c C-r")
