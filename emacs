@@ -34,6 +34,7 @@
       go-mode
       fiplr
       jabber
+      dtrt-indent
       magit)
       "List of packages needs to be installed at launch")
 
@@ -328,3 +329,6 @@
 (setq org-agenda-files (list "~/Org/work.org"))
 
 (js2r-add-keybindings-with-prefix "C-c C-r")
+
+(require 'dtrt-indent)
+(dtrt-indent-mode 1)

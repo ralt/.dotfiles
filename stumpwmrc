@@ -13,8 +13,8 @@
                "Starting swank. M-x slime-connect RET RET, then (in-package stumpwm)."))
 (swank)
 
-(stumpwm:run-shell-command "sb")
 (stumpwm:run-shell-command "set_resolution")
+(stumpwm:run-shell-command "setxkbmap -option ctrl:nocaps")
 
 (mode-line)
 
