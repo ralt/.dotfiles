@@ -332,3 +332,4 @@
 
 (require 'dtrt-indent)
 (dtrt-indent-mode 1)
+(setq dtrt-indent-min-indent-superiority 50)
