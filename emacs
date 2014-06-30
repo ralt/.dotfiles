@@ -21,6 +21,7 @@
       ace-jump-mode
       color-theme
       ido-better-flex
+      flx-ido
       paredit
       php-mode
       restclient
@@ -333,3 +334,7 @@
 (require 'dtrt-indent)
 (dtrt-indent-mode 1)
 (setq dtrt-indent-min-indent-superiority 50)
+
+(require 'flx-ido)
+(ido-mode 1)
+(flx-ido-mode 1) ;; disable ido faces to see flx highlights (setq ido-use-faces nil)
