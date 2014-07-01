@@ -22,6 +22,7 @@
       color-theme
       ido-better-flex
       flx-ido
+      ido-vertical-mode
       paredit
       php-mode
       restclient
@@ -338,3 +339,5 @@
 (require 'flx-ido)
 (ido-mode 1)
 (flx-ido-mode 1) ;; disable ido faces to see flx highlights (setq ido-use-faces nil)
+(ido-everywhere 1)
+(ido-vertical-mode)
