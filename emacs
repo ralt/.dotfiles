@@ -103,9 +103,6 @@
 (load (expand-file-name "~/quicklisp/slime-helper.el"))
 (setq inferior-lisp-program "/usr/local/bin/sbcl")
 
-(ido-mode)
-(setq ido-enable-flex-matching t)
-
 (show-paren-mode t)
 
 (require 'tls)
@@ -338,12 +335,6 @@
 (dtrt-indent-mode 1)
 (setq dtrt-indent-min-indent-superiority 50)
 
-(require 'flx-ido)
-(ido-mode 1)
-(flx-ido-mode 1) ;; disable ido faces to see flx highlights (setq ido-use-faces nil)
-(ido-everywhere 1)
-(ido-vertical-mode)
-
 (require 'helm-config) (require 'helm-cmd-t)
 
 (defun helm-cmd-t-ad-hoc ()
@@ -361,11 +352,11 @@
   (interactive)
   (let ((file-name (buffer-file-name)))
     (dolist (path (get-hash-values *projects*))
-      (message path)
-      (message file-name)
-      (message "---")
-      (message (substring file-name 0 (length path)))
       (when (string= path (substring file-name 0 (length path)))
         (helm :sources (list (helm-cmd-t-get-create-source-dir path)))))))
 
 (global-set-key (kbd "M-t") 'helm-run-cmd-t-in-correct-folder)
+
+(global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "C-x b") 'helm-buffers-list)
