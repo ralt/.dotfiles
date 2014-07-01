@@ -1,8 +1,8 @@
 (defvar *projects* (make-hash-table :test 'equal))
 
-(puthash "cso" "/lxc/total-cso/var/www/total-cso" *projects*)
-(puthash "labs" "/lxc/cera-labs/var/www/cera-labs" *projects*)
-(puthash "mpi" "/lxc/cera-mesprojetsimmobiliers/var/www/cera-mesprojetsimmobiliers" *projects*)
+(puthash "cso" "/home/flmar/lxc/total-cso/var/www/total-cso" *projects*)
+(puthash "labs" "/home/flmar/lxc/cera-labs/var/www/cera-labs" *projects*)
+(puthash "mpi" "/home/flmar/lxc/cera-mesprojetsimmobiliers/var/www/cera-mesprojetsimmobiliers" *projects*)
 
 (require 'package)
 (add-to-list 'package-archives
@@ -37,6 +37,8 @@
       fiplr
       jabber
       dtrt-indent
+      helm
+      helm-cmd-t
       magit)
       "List of packages needs to be installed at launch")
 
@@ -341,3 +343,29 @@
 (flx-ido-mode 1) ;; disable ido faces to see flx highlights (setq ido-use-faces nil)
 (ido-everywhere 1)
 (ido-vertical-mode)
+
+(require 'helm-config) (require 'helm-cmd-t)
+
+(defun helm-cmd-t-ad-hoc ()
+  "Choose file from folder."
+  (interactive)
+  (helm :sources (list cso-source mpi-source)))
+
+(defun get-hash-values (hashtable)
+  "Return all values in HASHTABLE."
+  (let (allvals)
+    (maphash (lambda (kk vv) (setq allvals (cons vv allvals))) hashtable)
+    allvals))
+
+(defun helm-run-cmd-t-in-correct-folder ()
+  (interactive)
+  (let ((file-name (buffer-file-name)))
+    (dolist (path (get-hash-values *projects*))
+      (message path)
+      (message file-name)
+      (message "---")
+      (message (substring file-name 0 (length path)))
+      (when (string= path (substring file-name 0 (length path)))
+        (helm :sources (list (helm-cmd-t-get-create-source-dir path)))))))
+
+(global-set-key (kbd "M-t") 'helm-run-cmd-t-in-correct-folder)
