@@ -32,9 +32,10 @@
       web-mode
       org
       go-mode
-      fiplr
       jabber
       dtrt-indent
+      auto-complete
+      ac-helm
       helm
       helm-cmd-t
       magit)
