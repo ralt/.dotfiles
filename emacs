@@ -335,28 +335,31 @@
 (dtrt-indent-mode 1)
 (setq dtrt-indent-min-indent-superiority 50)
 
-(require 'helm-config) (require 'helm-cmd-t)
+(require 'helm-config)
+(require 'helm-cmd-t)
 
-(defun helm-cmd-t-ad-hoc ()
-  "Choose file from folder."
-  (interactive)
-  (helm :sources (list cso-source mpi-source)))
+;; Necessary before emacs 24.4
+(unless (fboundp 'hash-table-values)
+  (defun hash-table-values (hashtable)
+    (let (allvals)
+      (maphash (lambda (kk vv) (setq allvals (cons vv allvals))) hashtable)
+      allvals)))
 
-(defun get-hash-values (hashtable)
-  "Return all values in HASHTABLE."
-  (let (allvals)
-    (maphash (lambda (kk vv) (setq allvals (cons vv allvals))) hashtable)
-    allvals))
+(unless (fboundp 'hash-table-keys)
+  (defun get-hash-keys (hashtable)
+    "Return all keys in hashtable."
+    (let (allkeys)
+      (maphash (lambda (kk vv) (setq allkeys (cons kk allkeys))) hashtable)
+      allkeys)))
 
 (defun helm-run-cmd-t-in-correct-folder ()
   (interactive)
   (let ((file-name (buffer-file-name)))
-    (dolist (path (get-hash-values *projects*))
+    (dolist (path (hash-table-values *projects*))
       (when (string= path (substring file-name 0 (length path)))
         (helm :sources (list (helm-cmd-t-get-create-source-dir path)))))))
 
 (global-set-key (kbd "M-t") 'helm-run-cmd-t-in-correct-folder)
-
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (global-set-key (kbd "C-x b") 'helm-buffers-list)
