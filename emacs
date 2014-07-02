@@ -342,11 +342,17 @@
       (maphash (lambda (kk vv) (setq allvals (cons vv allvals))) hashtable)
       allvals)))
 
+(unless (fboundp 'hash-table-values)
+  (defun hash-table-values (hashtable)
+    (let (allvals)
+      (maphash (lambda (_kk vv) (push vv allvals)) hashtable)
+    allvals)))
+
 (unless (fboundp 'hash-table-keys)
   (defun get-hash-keys (hashtable)
     "Return all keys in hashtable."
     (let (allkeys)
-      (maphash (lambda (kk vv) (setq allkeys (cons kk allkeys))) hashtable)
+      (maphash (lambda (kk _vv) (push kk allkeys)) hashtable)
       allkeys)))
 
 (defun helm-run-cmd-t-in-correct-folder ()
