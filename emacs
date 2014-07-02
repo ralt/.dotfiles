@@ -368,4 +368,9 @@
 (global-set-key (kbd "C-x b") 'helm-buffers-list)
 (global-set-key (kbd "M-g s") 'helm-do-grep)
 
+(require 'ac-helm)
+(auto-complete-mode t)
+(global-set-key (kbd "C-:") 'ac-complete-with-helm)
+(define-key ac-complete-mode-map (kbd "C-:") 'ac-complete-with-helm)
+
 (load-theme 'monokai t)

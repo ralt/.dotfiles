@@ -16,6 +16,8 @@
 (stumpwm:run-shell-command "set_resolution")
 (stumpwm:run-shell-command "setxkbmap -option ctrl:nocaps")
 
+;; how many seconds elapse between each update of the modeline
+(setf *mode-line-timeout* 1) ; must be set *before* turning on the modeline
 (mode-line)
 
 ;; Turn on the modeline
@@ -26,7 +28,7 @@
 (setf *screen-mode-line-format*
       (list '(:eval (run-shell-command "date '+%R, %F %a'|tr -d [:cntrl:]" t)) " [^B%n^b] %W"))
 
-(stumpwm:set-prefix-key (stumpwm:kbd "C-d"))
+(stumpwm:set-prefix-key (stumpwm:kbd "C-t"))
 
 (defun banish-on-focus (cur last)
   (declare (ignore last))
@@ -58,10 +60,13 @@
 
 ;;; Window Appearance
 ;; The width in pixels given to the borders of regular windows.
-(setf *normal-border-width* 0)
+(setf *normal-border-width* 1)
 ;; The width in pixels given to the borders of windows with maxsize or ratio hints.
-(setf *maxsize-border-width* 0)
+(setf *maxsize-border-width* 1)
 ;; The width in pixels given to the borders of transient or pop-up windows.
-(setf *transient-border-width* 0)
+(setf *transient-border-width* 1)
 
 (setf *mouse-focus-policy* :sloppy) ;; :click, :ignore, :sloppy
+
+(setf *window-number-map* "1234567890")
+(setf *frame-number-map* "1234567890")
