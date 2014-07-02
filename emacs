@@ -20,9 +20,7 @@
       color-theme-solarized
       ace-jump-mode
       color-theme
-      ido-better-flex
-      flx-ido
-      ido-vertical-mode
+      monokai-theme
       paredit
       php-mode
       restclient
@@ -180,10 +178,10 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(browse-url-browser-function (quote browse-url-default-browser))
- '(custom-safe-themes (quote ("1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" "fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" default)))
+ '(custom-safe-themes (quote ("60f04e478dedc16397353fb9f33f0d895ea3dab4f581307fbf0aa2f07e658a40" "1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" "fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" default)))
  '(ecb-auto-activate t)
  '(erc-modules (quote (autojoin button completion fill irccontrols list match menu move-to-prompt netsplit networks noncommands readonly ring services stamp track)))
- '(jabber-alert-message-hooks (quote (jabber-message-awesome libnotify-jabber-notify jabber-message-echo jabber-message-scroll)) t)
+ '(jabber-alert-message-hooks (quote (jabber-message-awesome libnotify-jabber-notify jabber-message-echo jabber-message-scroll)))
  '(jabber-alert-presence-hooks nil))
 
 (global-set-key (kbd "C-x <up>") 'windmove-up)
@@ -194,7 +192,6 @@
 (setq x-select-enable-clipboard t)
 (setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
 
-(load-theme 'solarized-dark t)
 (add-hook 'php-mode-hook 'my-php-mode-stuff)
 
 (defun my-php-mode-stuff ()
@@ -364,3 +361,5 @@
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (global-set-key (kbd "C-x b") 'helm-buffers-list)
 (global-set-key (kbd "M-g s") 'helm-do-grep)
+
+(load-theme 'monokai t)
