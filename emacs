@@ -363,6 +363,7 @@
       (when (string= path (substring file-name 0 (length path)))
         (helm :sources (list (helm-cmd-t-get-create-source-dir path)))))))
 
+(global-set-key (kbd "M-r") 'helm-cmd-t)
 (global-set-key (kbd "M-t") 'helm-run-cmd-t-in-correct-folder)
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
