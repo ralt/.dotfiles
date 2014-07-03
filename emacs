@@ -170,7 +170,7 @@
       browse-url-generic-program "google-chrome")
 
 (add-to-list 'auto-mode-alist '("\\.\\(module\\|test\\|install\\|theme\\)$" . drupal-mode))
-(add-to-list 'auto-mode-alist '("\\.\\(php\\|inc\\)$" . php-mode))
+(add-to-list 'auto-mode-alist '("\\.\\(php\\|inc\\)$" . drupal-mode))
 (add-to-list 'auto-mode-alist '("\\.tpl\\.php$" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.info" . conf-windows-mode))
 (custom-set-variables
@@ -376,3 +376,38 @@
 (define-key ac-complete-mode-map (kbd "C-:") 'ac-complete-with-helm)
 
 (load-theme 'monokai t)
+
+(require 'w3m)
+(setq w3m-home-page "https://www.google.com")
+(setq browse-url-browser-function 'w3m-browse-url)
+
+(defun drupal-doc ()
+  (interactive)
+  (setq-local helm-dash-docsets '("Drupal" "PHP")))
+
+(global-set-key (kbd "C-h C-k f") 'helm-dash)
+(global-set-key (kbd "C-h C-k g") 'helm-dash-at-point)
+
+(defun jwintz/dash-path (docset)
+  (if (string= docset "OpenGL_2")
+      (concat (concat helm-dash-docsets-path "/") "OpenGL2.docset")
+    (if (string= docset "OpenGL_3")
+        (concat (concat helm-dash-docsets-path "/") "OpenGL3.docset")
+      (if (string= docset "OpenGL_4")
+          (concat (concat helm-dash-docsets-path "/") "OpenGL4.docset")
+        (if (string= docset "Emacs_Lisp")
+            (concat (concat helm-dash-docsets-path "/") "Emacs Lisp.docset")
+          (concat
+            (concat
+             (concat
+              (concat helm-dash-docsets-path "/")
+              (nth 0 (split-string docset "_")))) ".docset"))))))
+
+(defun jwintz/dash-install (docset)
+  (unless (file-exists-p (jwintz/dash-path docset))
+    (helm-dash-install-docset docset)))
+
+(setq helm-dash-docsets-path (format "%s/.emacs.d/docsets" (getenv "HOME")))
+
+(jwintz/dash-install "PHP")
+(jwintz/dash-install "Drupal")
