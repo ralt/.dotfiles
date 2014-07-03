@@ -306,7 +306,6 @@
 (add-hook 'php-mode-hook (lambda ()
                            (add-hook 'c-special-indent-hook 'unident-closure)))
 
-(setq browse-url-browser-function 'browse-url-generic browse-url-generic-program "google-chrome")
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -379,7 +378,6 @@
 
 (require 'w3m)
 (setq w3m-home-page "https://www.google.com")
-(setq browse-url-browser-function 'w3m-browse-url)
 
 (defun drupal-doc ()
   (interactive)
@@ -411,3 +409,17 @@
 
 (jwintz/dash-install "PHP")
 (jwintz/dash-install "Drupal")
+
+(setq browse-url-browser-function 'browse-url-generic browse-url-generic-program "google-chrome")
+(setq browse-url-browser-function 'w3m-browse-url)
+(setq current-browser "w3m")
+
+(defun switch-browser ()
+  (interactive)
+  (if (string= current-browser "w3m")
+      (progn
+        (setq browse-url-browser-function 'browse-url-generic browse-url-generic-program "google-chrome")
+        (setq current-browser "google-chrome"))
+    (progn
+      (setq browse-url-browser-function 'w3m-browse-url)
+      (setq current-browser "w3m"))))
