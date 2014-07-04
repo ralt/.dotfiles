@@ -38,6 +38,7 @@
       ac-helm
       helm
       helm-cmd-t
+      helm-dash
       magit)
       "List of packages needs to be installed at launch")
 
@@ -376,8 +377,10 @@
 
 (load-theme 'monokai t)
 
-(require 'w3m)
-(setq w3m-home-page "https://www.google.com")
+(when (fboundp 'w3m)
+  (progn
+    (require 'w3m)
+    (setq w3m-home-page "https://www.google.com")))
 
 (defun drupal-doc ()
   (interactive)
@@ -419,7 +422,9 @@
   (if (string= current-browser "w3m")
       (progn
         (setq browse-url-browser-function 'browse-url-generic browse-url-generic-program "google-chrome")
-        (setq current-browser "google-chrome"))
+        (setq current-browser "google-chrome")
+        (message "Switching to google-chrome"))
     (progn
       (setq browse-url-browser-function 'w3m-browse-url)
-      (setq current-browser "w3m"))))
+      (setq current-browser "w3m")
+      (message "Switching to w3m"))))
