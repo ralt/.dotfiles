@@ -55,8 +55,19 @@
   "run emacs"
   (run-or-raise "emacs" '(:title "emacs")))
 
+(defcommand screenshot () ()
+  "screenshot"
+  (run-shell-command "gnome-screenshot"))
+
+(defcommand screenshot-area () ()
+  "screenshot-area"
+  (run-shell-command "gnome-screenshot -a"))
+
 (define-key *top-map* (kbd "s-1") "google-chrome")
 (define-key *top-map* (kbd "s-2") "emacs")
+
+(define-key *top-map* (kbd "s-#") "screenshot")
+(define-key *top-map* (kbd "s-$") "screenshot-area")
 
 ;;; Window Appearance
 ;; The width in pixels given to the borders of regular windows.
