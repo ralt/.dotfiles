@@ -63,15 +63,11 @@
   "screenshot-area"
   (run-shell-command "gnome-screenshot -a"))
 
-;;; It's way too long to write all this all the time
-(defmacro +s (&body body)
-  `(concatenate 'string ,@body))
-
 (loop for i from 1 to 9
      do (define-key
             *top-map*
-            (kbd (+s "s-" (write-to-string i)))
-            (+s "select-window-by-number " (write-to-string i))))
+            (kbd (format nil "s-~d" i))
+            (format nil "select-window-by-number ~d" i)))
 
 (define-key *top-map* (kbd "s-ESC") "gother")
 
