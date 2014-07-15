@@ -132,10 +132,6 @@
                                   (nnimap-server-port 993)
                                   (nnimap-stream ssl)))
 
-(require 'gnus-desktop-notify)
-(gnus-desktop-notify-mode)
-(gnus-demon-add-scanmail)
-
 (setq mm-discouraged-alternatives '("text/html" "text/richtext"))
 
 (setq user-mail-address "florian.margaine@smile.fr")
