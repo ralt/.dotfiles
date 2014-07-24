@@ -63,13 +63,30 @@
   "screenshot-area"
   (run-shell-command "gnome-screenshot -a"))
 
+(defcommand poweroff () ()
+  "poweroff"
+  (run-shell-command "sudo poweroff"))
+
+(defcommand reboot () ()
+  "reboot"
+  (run-shell-command "sudo reboot"))
+
+(defcommand term () ()
+  "xterm"
+  (run-shell-command "gnome-terminal"))
+
+(define-key *root-map* (kbd "x") "term")
+(define-key *root-map* (kbd "c") "google-chrome")
+
 (loop for i from 1 to 9
      do (define-key
             *top-map*
             (kbd (format nil "s-~d" i))
             (format nil "select-window-by-number ~d" i)))
 
+;; Navigation
 (define-key *top-map* (kbd "s-ESC") "gother")
+(define-key *top-map* (kbd "s-n") "next")
 
 (define-key *top-map* (kbd "s-#") "screenshot")
 (define-key *top-map* (kbd "s-$") "screenshot-area")
