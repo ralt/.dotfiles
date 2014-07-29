@@ -105,16 +105,4 @@
 (setf *window-number-map* "1234567890")
 (setf *frame-number-map* "1234567890")
 
-(defparameter *last-window* 0)
-
-(defun set-last-window (new old)
-  (declare (ignore new))
-  (setf *last-window* (window-number old)))
-
-(defcommand go-to-last-window () ()
-  "go to the last window"
-  (select-window-by-number *last-window*))
-
-(add-hook *focus-window-hook* #'set-last-window)
-
-(define-key *top-map* (kbd "s-`") "go-to-last-window")
+(define-key *top-map* (kbd "s-`") "other")
