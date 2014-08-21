@@ -10,6 +10,8 @@
            "http://marmalade-repo.org/packages/") t)
 (add-to-list 'package-archives
   '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(add-to-list 'package-archives
+             '("e6h" . "http://www.e6h.org/packages/"))
 (package-initialize)
 
 (require 'cl)
@@ -73,9 +75,6 @@
 ;80 characters ftw
 (add-to-list 'default-frame-alist '(width . 80))
 
-;before saving, remove all trailing whitespace (god forbid)
-(add-hook 'before-save-hook 'whitespace-cleanup)
-
 ;show column number
 (column-number-mode t)
 ;(global-linum-mode t)
@@ -110,10 +109,30 @@
 (defun start-irc ()
   "Connect to IRC."
   (interactive)
-  (erc :server "irc.freenode.net" :port 6667
-           :nick "Ralt" :full-name "Ralt"))
+  (setq start-irc-password (read-passwd "ZNC password: "))
+  (erc :server "vm.margaine.com" :port 6667
+       :password start-irc-password
+       :nick "Ralt"
+       :full-name "Ralt"))
 
-(setq erc-autojoin-channels-alist '(("freenode.net" "#lisp" "#promises" "#sojavascript" "#stumpwm")))
+(setq erc-autojoin-channels-alist '(("freenode.net" "#lisp" "#promises" "#sojavascript" "#stumpwm" "#ada")))
+
+(add-to-list 'load-path "~/.emacs.d/mu4e")
+(require 'mu4e)
+(setq mu4e-maildir "~/Mail")
+(setq mu4e-drafts-folder "/Drafts")
+(setq mu4e-sent-folder "/Sent")
+(setq mu4e-trash-folder "/Trash")
+(setq mu4e-get-mail-command "offlineimap"
+      mu4e-update-interval 60
+      message-send-mail-function 'smtpmail-send-it
+      message-kill-buffer-on-exit t)
+(setq mu4e-view-prefer-html t)
+(setq mu4e-view-show-images nil)
+(setq mu4e-html2text-command "html2text -utf8 -width 72")
+(setq mail-user-agent 'mu4e-user-agent)
+(setq mu4e-hide-index-messages t)
+(setq mu4e-split-view 'vertical)
 
 (setq starttls-use-gnutls t)
 (setq starttls-gnutls-program "gnutls-cli")
@@ -183,8 +202,9 @@
  '(custom-safe-themes (quote ("60f04e478dedc16397353fb9f33f0d895ea3dab4f581307fbf0aa2f07e658a40" "1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" "fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" default)))
  '(ecb-auto-activate t)
  '(erc-modules (quote (autojoin button completion fill irccontrols list match menu move-to-prompt netsplit networks noncommands readonly ring services stamp track)))
- '(jabber-alert-message-hooks (quote (jabber-message-awesome libnotify-jabber-notify jabber-message-echo jabber-message-scroll)))
- '(jabber-alert-presence-hooks nil))
+ '(jabber-alert-message-hooks (quote (jabber-message-awesome libnotify-jabber-notify jabber-message-echo jabber-message-scroll)) t)
+ '(jabber-alert-presence-hooks nil)
+ '(mu4e-headers-fields (quote ((:human-date . 12) (:maildir . 10) (:flags . 6) (:from . 22) (:subject)))))
 
 (global-set-key (kbd "C-x <up>") 'windmove-up)
 (global-set-key (kbd "C-x <down>") 'windmove-down)
@@ -428,3 +448,17 @@
       (setq browse-url-browser-function 'w3m-browse-url)
       (setq current-browser "w3m")
       (message "Switching to w3m"))))
+
+(global-set-key (kbd "C-c b") 'mu4e-headers-search-bookmark)
+(global-set-key (kbd "C-c d") 'mu4e~headers-jump-to-maildir)
+(global-set-key (kbd "C-c m") 'mu4e-compose-new)
+(global-set-key (kbd "C-c s") 'mu4e-headers-search)
+
+(add-to-list 'mu4e-header-info
+  '(:maildir .
+    (:name "Maildir"
+     :shortname "Maildir"
+     :help "The maildir where this message is stored."
+     :function
+     (lambda (msg)
+       (format "%s" (mu4e-message-field msg :maildir))))))
