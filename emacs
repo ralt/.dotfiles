@@ -113,7 +113,7 @@
   (erc :server "irc.freenode.net" :port 6667
            :nick "Ralt" :full-name "Ralt"))
 
-(setq erc-autojoin-channels-alist '(("freenode.net" "#lisp" "#promises" "#sojavascript" "#stumpwm")))
+(setq erc-autojoin-channels-alist '(("freenode.net" "#lisp" "#promises" "#sojavascript" "#stumpwm" "#ada")))
 
 (setq starttls-use-gnutls t)
 (setq starttls-gnutls-program "gnutls-cli")
@@ -317,8 +317,6 @@
 ;; paste fix
 (setq interprogram-paste-function 'x-selection-value)
 
-(require 'go-mode-load)
-
 (require 'org)
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
@@ -415,7 +413,7 @@
 
 (setq browse-url-browser-function 'browse-url-generic browse-url-generic-program "google-chrome")
 (setq browse-url-browser-function 'w3m-browse-url)
-(setq current-browser "w3m")
+(setq current-browser "google-chrome")
 
 (defun switch-browser ()
   (interactive)
