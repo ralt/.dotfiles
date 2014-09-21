@@ -41,6 +41,8 @@
       helm
       helm-cmd-t
       helm-dash
+      base16-theme
+      powerline
       magit)
       "List of packages needs to be installed at launch")
 
@@ -67,7 +69,7 @@
 (setq-default highlight-tabs t)
 
 ;; Remove useless whitespaces before saving a file
-(add-hook 'before-save-hook 'whitespace-cleanup)
+;;(add-hook 'before-save-hook 'whitespace-cleanup)
 
 ;; Prevent extraneous tabs
 (setq-default indent-tabs-mode nil)
@@ -115,24 +117,7 @@
        :nick "Ralt"
        :full-name "Ralt"))
 
-(setq erc-autojoin-channels-alist '(("freenode.net" "#lisp" "#promises" "#sojavascript" "#stumpwm" "#ada")))
-
-(add-to-list 'load-path "~/.emacs.d/mu4e")
-(require 'mu4e)
-(setq mu4e-maildir "~/Mail")
-(setq mu4e-drafts-folder "/Drafts")
-(setq mu4e-sent-folder "/Sent")
-(setq mu4e-trash-folder "/Trash")
-(setq mu4e-get-mail-command "offlineimap"
-      mu4e-update-interval 60
-      message-send-mail-function 'smtpmail-send-it
-      message-kill-buffer-on-exit t)
-(setq mu4e-view-prefer-html t)
-(setq mu4e-view-show-images nil)
-(setq mu4e-html2text-command "html2text -utf8 -width 72")
-(setq mail-user-agent 'mu4e-user-agent)
-(setq mu4e-hide-index-messages t)
-(setq mu4e-split-view 'vertical)
+(setq erc-autojoin-channels-alist '(("freenode.net" "#lisp" "#promises" "#sojavascript" "#lispweb" "#emacs" "#reckict" "#drupal-commerce")))
 
 (setq starttls-use-gnutls t)
 (setq starttls-gnutls-program "gnutls-cli")
@@ -199,7 +184,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(browse-url-browser-function (quote browse-url-default-browser))
- '(custom-safe-themes (quote ("60f04e478dedc16397353fb9f33f0d895ea3dab4f581307fbf0aa2f07e658a40" "1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" "fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" default)))
+ '(custom-safe-themes (quote ("de2c46ed1752b0d0423cde9b6401062b67a6a1300c068d5d7f67725adc6c3afb" "41b6698b5f9ab241ad6c30aea8c9f53d539e23ad4e3963abff4b57c0f8bf6730" "51bea7765ddaee2aac2983fac8099ec7d62dff47b708aa3595ad29899e9e9e44" "f41fd682a3cd1e16796068a2ca96e82cfd274e58b978156da0acce4d56f2b0d5" "405fda54905200f202dd2e6ccbf94c1b7cc1312671894bc8eca7e6ec9e8a41a2" "e53cc4144192bb4e4ed10a3fa3e7442cae4c3d231df8822f6c02f1220a0d259a" "978ff9496928cc94639cb1084004bf64235c5c7fb0cfbcc38a3871eb95fa88f6" "ae8d0f1f36460f3705b583970188e4fbb145805b7accce0adb41031d99bd2580" "9bac44c2b4dfbb723906b8c491ec06801feb57aa60448d047dbfdbd1a8650897" "1affe85e8ae2667fb571fc8331e1e12840746dae5c46112d5abb0c3a973f5f5a" "e80a0a5e1b304eb92c58d0398464cd30ccbc3622425b6ff01eea80e44ea5130e" "60f04e478dedc16397353fb9f33f0d895ea3dab4f581307fbf0aa2f07e658a40" "1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" "fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" default)))
  '(ecb-auto-activate t)
  '(erc-modules (quote (autojoin button completion fill irccontrols list match menu move-to-prompt netsplit networks noncommands readonly ring services stamp track)))
  '(jabber-alert-message-hooks (quote (jabber-message-awesome libnotify-jabber-notify jabber-message-echo jabber-message-scroll)) t)
@@ -393,7 +378,7 @@
 (global-set-key (kbd "C-:") 'ac-complete-with-helm)
 (define-key ac-complete-mode-map (kbd "C-:") 'ac-complete-with-helm)
 
-(load-theme 'monokai t)
+(load-theme 'base16-default t)
 
 (when (fboundp 'w3m)
   (progn
@@ -447,16 +432,21 @@
       (setq current-browser "w3m")
       (message "Switching to w3m"))))
 
-(global-set-key (kbd "C-c b") 'mu4e-headers-search-bookmark)
-(global-set-key (kbd "C-c d") 'mu4e~headers-jump-to-maildir)
-(global-set-key (kbd "C-c m") 'mu4e-compose-new)
-(global-set-key (kbd "C-c s") 'mu4e-headers-search)
+(require 'powerline)
+(powerline-default-theme)
 
-(add-to-list 'mu4e-header-info
-  '(:maildir .
-    (:name "Maildir"
-     :shortname "Maildir"
-     :help "The maildir where this message is stored."
-     :function
-     (lambda (msg)
-       (format "%s" (mu4e-message-field msg :maildir))))))
+;; source: http://steve.yegge.googlepages.com/my-dot-emacs-file
+(defun rename-file-and-buffer (new-name)
+  "Renames both current buffer and file it's visiting to NEW-NAME."
+  (interactive "sNew name: ")
+  (let ((name (buffer-name))
+        (filename (buffer-file-name)))
+    (if (not filename)
+        (message "Buffer '%s' is not visiting a file!" name)
+      (if (get-buffer new-name)
+          (message "A buffer named '%s' already exists!" new-name)
+        (progn
+          (rename-file name new-name 1)
+          (rename-buffer new-name)
+          (set-visited-file-name new-name)
+          (set-buffer-modified-p nil))))))
