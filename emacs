@@ -553,3 +553,5 @@
 
 ;; need this to convert some e-mails properly
 (setq mu4e-html2text-command "html2text -utf8 -width 72")
+
+(global-set-key (kbd "C-x s") 'helm-imenu)
