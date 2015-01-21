@@ -20,30 +20,37 @@
       '(markdown-mode
       color-theme
       color-theme-solarized
-      ace-jump-mode
-      color-theme
       monokai-theme
       paredit
       php-mode
-      restclient
       js2-mode
       js2-refactor
-      discover
-      discover-js2-refactor
       autopair
       web-mode
       org
       go-mode
-      jabber
       dtrt-indent
       auto-complete
       ac-helm
       helm
-      helm-cmd-t
       helm-dash
-      base16-theme
       powerline
-      magit)
+      aggressive-indent
+      magit
+      async
+      epl
+      f
+      gh
+      gist
+      git-commit-mode
+      git-rebase-mode
+      helm-projectile
+      htmlfontify
+      makey
+      multi-term
+      names
+      projectile
+      web-mode)
       "List of packages needs to be installed at launch")
 
 (defun has-package-not-installed ()
@@ -70,9 +77,6 @@
 
 ;; Remove useless whitespaces before saving a file
 ;;(add-hook 'before-save-hook 'whitespace-cleanup)
-
-;; Prevent extraneous tabs
-(setq-default indent-tabs-mode nil)
 
 ;80 characters ftw
 (add-to-list 'default-frame-alist '(width . 80))
@@ -102,7 +106,7 @@
 ;...by any means necessary
 
 (load (expand-file-name "~/quicklisp/slime-helper.el"))
-(setq inferior-lisp-program "/usr/local/bin/sbcl")
+(setq inferior-lisp-program "/usr/bin/sbcl")
 
 (show-paren-mode t)
 
@@ -123,22 +127,8 @@
 (setq starttls-gnutls-program "gnutls-cli")
 (setq starttls-extra-arguments nil)
 
-(setq message-send-mail-function 'smtpmail-send-it
-      smtpmail-default-smtp-server "smtp.gnb.intranet"
-      smtpmail-smtp-server "smtp.gnb.intranet"
-      smtpmail-smtp-service 25
-      smtpmail-starttls-credentials '(("smtp.gnb.intranet" 25 nil nil))
-      smtpmail-auth-credentials '(("smtp.gnb.intranet" 25 "flmar" nil))
-      smtpmail-debug-info t)
-
-(setq gnus-select-method '(nnimap "smile"
-                                  (nnimap-address "bluemind.smile.fr")
-                                  (nnimap-server-port 993)
-                                  (nnimap-stream ssl)))
-
 (setq mm-discouraged-alternatives '("text/html" "text/richtext"))
 
-(setq user-mail-address "florian.margaine@smile.fr")
 (setq user-full-name "Florian Margaine")
 
 (autoload 'php-mode "php-mode" "Major mode for editing php code." t)
@@ -183,13 +173,29 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(auto-save-file-name-transforms (quote ((".*" "~/.emacs.d/autosaves/\\1" t))))
+ '(backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/"))))
  '(browse-url-browser-function (quote browse-url-default-browser))
- '(custom-safe-themes (quote ("de2c46ed1752b0d0423cde9b6401062b67a6a1300c068d5d7f67725adc6c3afb" "41b6698b5f9ab241ad6c30aea8c9f53d539e23ad4e3963abff4b57c0f8bf6730" "51bea7765ddaee2aac2983fac8099ec7d62dff47b708aa3595ad29899e9e9e44" "f41fd682a3cd1e16796068a2ca96e82cfd274e58b978156da0acce4d56f2b0d5" "405fda54905200f202dd2e6ccbf94c1b7cc1312671894bc8eca7e6ec9e8a41a2" "e53cc4144192bb4e4ed10a3fa3e7442cae4c3d231df8822f6c02f1220a0d259a" "978ff9496928cc94639cb1084004bf64235c5c7fb0cfbcc38a3871eb95fa88f6" "ae8d0f1f36460f3705b583970188e4fbb145805b7accce0adb41031d99bd2580" "9bac44c2b4dfbb723906b8c491ec06801feb57aa60448d047dbfdbd1a8650897" "1affe85e8ae2667fb571fc8331e1e12840746dae5c46112d5abb0c3a973f5f5a" "e80a0a5e1b304eb92c58d0398464cd30ccbc3622425b6ff01eea80e44ea5130e" "60f04e478dedc16397353fb9f33f0d895ea3dab4f581307fbf0aa2f07e658a40" "1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" "fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" default)))
+ '(custom-safe-themes
+   (quote
+    ("4e262566c3d57706c70e403d440146a5440de056dfaeb3062f004da1711d83fc" "de2c46ed1752b0d0423cde9b6401062b67a6a1300c068d5d7f67725adc6c3afb" "41b6698b5f9ab241ad6c30aea8c9f53d539e23ad4e3963abff4b57c0f8bf6730" "51bea7765ddaee2aac2983fac8099ec7d62dff47b708aa3595ad29899e9e9e44" "f41fd682a3cd1e16796068a2ca96e82cfd274e58b978156da0acce4d56f2b0d5" "405fda54905200f202dd2e6ccbf94c1b7cc1312671894bc8eca7e6ec9e8a41a2" "e53cc4144192bb4e4ed10a3fa3e7442cae4c3d231df8822f6c02f1220a0d259a" "978ff9496928cc94639cb1084004bf64235c5c7fb0cfbcc38a3871eb95fa88f6" "ae8d0f1f36460f3705b583970188e4fbb145805b7accce0adb41031d99bd2580" "9bac44c2b4dfbb723906b8c491ec06801feb57aa60448d047dbfdbd1a8650897" "1affe85e8ae2667fb571fc8331e1e12840746dae5c46112d5abb0c3a973f5f5a" "e80a0a5e1b304eb92c58d0398464cd30ccbc3622425b6ff01eea80e44ea5130e" "60f04e478dedc16397353fb9f33f0d895ea3dab4f581307fbf0aa2f07e658a40" "1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" "fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" default)))
  '(ecb-auto-activate t)
- '(erc-modules (quote (autojoin button completion fill irccontrols list match menu move-to-prompt netsplit networks noncommands readonly ring services stamp track)))
- '(jabber-alert-message-hooks (quote (jabber-message-awesome libnotify-jabber-notify jabber-message-echo jabber-message-scroll)) t)
+ '(erc-modules
+   (quote
+    (autojoin button completion fill irccontrols list match menu move-to-prompt netsplit networks noncommands readonly ring services stamp track)))
+ '(jabber-alert-message-hooks
+   (quote
+    (jabber-message-awesome libnotify-jabber-notify jabber-message-echo jabber-message-scroll)) t)
  '(jabber-alert-presence-hooks nil)
- '(mu4e-headers-fields (quote ((:human-date . 12) (:maildir . 10) (:flags . 6) (:from . 22) (:subject)))))
+ '(mu4e-headers-fields
+   (quote
+    ((:human-date . 12)
+     (:maildir . 10)
+     (:flags . 6)
+     (:from . 22)
+     (:subject))))
+ '(org-agenda-files (quote ("~/Org/tasks.org")))
+ '(org-support-shift-select t))
 
 (global-set-key (kbd "C-x <up>") 'windmove-up)
 (global-set-key (kbd "C-x <down>") 'windmove-down)
@@ -265,21 +271,17 @@
   (interactive "sEnter project name: ")
   (cd (gethash project *projects*)))
 
-(defun my-gnus-group-list-subscribed-groups ()
-  "List all subscribed groups with or without un-read messages"
-  (interactive)
-  (gnus-group-list-all-groups 5))
-(add-hook 'gnus-group-mode-hook
-          ;; list all the subscribed groups even they contain zero un-read messages
-          (lambda () (local-set-key "o" 'my-gnus-group-list-subscribed-groups )))
-
 ;; Ask "y" or "n" instead of "yes" or "no". Yes, laziness is great.
 (fset 'yes-or-no-p 'y-or-n-p)
 
 ;; Remove all backup files
 (setq make-backup-files nil)
 (setq backup-inhibited t)
-(setq auto-save-default nil)
+;; Put autosave files (ie #foo#) and backup files (ie foo~) in ~/.emacs.d/.
+
+
+;; create the autosave dir if necessary, since emacs won't.
+(make-directory "~/.emacs.d/autosaves/" t)
 
 (global-set-key (kbd "C-x o") 'switch-window)
 
@@ -337,7 +339,6 @@
 (setq dtrt-indent-min-indent-superiority 50)
 
 (require 'helm-config)
-(require 'helm-cmd-t)
 
 ;; Necessary before emacs 24.4
 (unless (fboundp 'hash-table-values)
@@ -359,15 +360,6 @@
       (maphash (lambda (kk _vv) (push kk allkeys)) hashtable)
       allkeys)))
 
-(defun helm-run-cmd-t-in-correct-folder ()
-  (interactive)
-  (let ((file-name (buffer-file-name)))
-    (dolist (path (hash-table-values *projects*))
-      (when (string= path (substring file-name 0 (length path)))
-        (helm :sources (list (helm-cmd-t-get-create-source-dir path)))))))
-
-(global-set-key (kbd "M-r") 'helm-cmd-t)
-(global-set-key (kbd "M-t") 'helm-run-cmd-t-in-correct-folder)
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (global-set-key (kbd "C-x b") 'helm-buffers-list)
@@ -377,13 +369,6 @@
 (auto-complete-mode t)
 (global-set-key (kbd "C-:") 'ac-complete-with-helm)
 (define-key ac-complete-mode-map (kbd "C-:") 'ac-complete-with-helm)
-
-(load-theme 'base16-default t)
-
-(when (fboundp 'w3m)
-  (progn
-    (require 'w3m)
-    (setq w3m-home-page "https://www.google.com")))
 
 (defun drupal-doc ()
   (interactive)
@@ -416,21 +401,20 @@
 (jwintz/dash-install "PHP")
 (jwintz/dash-install "Drupal")
 
-(setq browse-url-browser-function 'browse-url-generic browse-url-generic-program "google-chrome")
-(setq browse-url-browser-function 'w3m-browse-url)
-(setq current-browser "google-chrome")
+(setq browse-url-browser-function 'eww-browse-url)
+(setq current-browser "eww")
 
 (defun switch-browser ()
   (interactive)
-  (if (string= current-browser "w3m")
+  (if (string= current-browser "eww")
       (progn
         (setq browse-url-browser-function 'browse-url-generic browse-url-generic-program "google-chrome")
         (setq current-browser "google-chrome")
         (message "Switching to google-chrome"))
     (progn
-      (setq browse-url-browser-function 'w3m-browse-url)
-      (setq current-browser "w3m")
-      (message "Switching to w3m"))))
+      (setq browse-url-browser-function 'eww-browse-url)
+      (setq current-browser "eww")
+      (message "Switching to eww"))))
 
 (require 'powerline)
 (powerline-default-theme)
@@ -450,3 +434,240 @@
           (rename-buffer new-name)
           (set-visited-file-name new-name)
           (set-buffer-modified-p nil))))))
+
+(add-to-list 'load-path "/home/florian/mu-0.9.9.6/mu4e")
+
+(require 'mu4e)
+
+;; default
+;; (setq mu4e-maildir "~/Maildir")
+
+;; setup some handy shortcuts
+;; you can quickly switch to your Inbox -- press ``ji''
+;; then, when you want archive some messages, move them to
+;; the 'All Mail' folder by pressing ``ma''.
+
+(setq mu4e-maildir-shortcuts
+    '( ("/Work/INBOX"               . ?i)
+       ("/Work/[Gmail].Sent Mail"   . ?s)
+       ("/Personal/INBOX" . ?u)
+       ("/Personal/[Gmail].Sent Mail" . ?a)))
+
+;; allow for updating mail using 'U' in the main view:
+(setq mu4e-get-mail-command "offlineimap")
+
+(setq mu4e-headers-skip-duplicates t)
+
+;; something about ourselves
+(setq
+   user-mail-address "florian.margaine@commerceguys.com"
+   user-full-name  "Florian Margaine"
+   )
+
+;; sending mail -- replace USERNAME with your gmail username
+;; also, make sure the gnutls command line utils are installed
+;; package 'gnutls-bin' in Debian/Ubuntu
+
+(require 'smtpmail)
+
+(defvar my-mu4e-account-alist
+  '(("Work"
+     (mu4e-sent-folder "/Work/[Gmail].Sent Mail")
+     (mu4e-drafts-folder "/Work/[Gmail].Drafts")
+     (setq mu4e-trash-folder  "/Work/[Gmail].Trash")
+     (user-mail-address "florian.margaine@commerceguys.com")
+     (smtpmail-local-domain "commerceguys.com")
+     (smtpmail-default-smtp-server "smtp.gmail1.com")
+     (smtpmail-smtp-server "smtp.gmail1.com")
+     (mu4e-compose-signature
+      (concat
+       "Florian Margaine\n"
+       "\n"
+       "Drupal dev @ Commerce Guys\n"
+       "http://commerceguys.com\n"
+       "\n"
+       "Tel: +33 (0) 9 81 89 67 42\n")))
+    ("Personal"
+     (mu4e-sent-folder "/Personal/[Gmail].Sent Mail")
+     (mu4e-drafts-folder "/Personal/[Gmail].Drafts")
+     (setq mu4e-trash-folder  "/Personal/[Gmail].Trash")
+     (user-mail-address "florian@margaine.com")
+     (smtpmail-local-domain "margaine.com")
+     (smtpmail-default-smtp-server "smtp.gmail2.com")
+     (smtpmail-smtp-server "smtp.gmail2.com")
+     (mu4e-compose-signature
+      (concat
+       "Florian Margaine\n")))))
+
+(defun my-mu4e-set-account ()
+  "Set the account for composing a message."
+  (let* ((account
+          (if mu4e-compose-parent-message
+              (let ((maildir (mu4e-message-field mu4e-compose-parent-message :maildir)))
+                (string-match "/\\(.*?\\)/" maildir)
+                (match-string 1 maildir))
+            (completing-read (format "Compose with account: (%s) "
+                                     (mapconcat #'(lambda (var) (car var))
+                                                my-mu4e-account-alist "/"))
+                             (mapcar #'(lambda (var) (car var)) my-mu4e-account-alist)
+                             nil t nil nil (caar my-mu4e-account-alist))))
+         (account-vars (cdr (assoc account my-mu4e-account-alist))))
+    (if account-vars
+        (mapc #'(lambda (var)
+                  (set (car var) (cadr var)))
+              account-vars)
+      (error "No email account found"))))
+
+(add-hook 'mu4e-compose-pre-hook 'my-mu4e-set-account)
+
+;; alternatively, for emacs-24 you can use:
+(setq message-send-mail-function 'smtpmail-send-it
+     smtpmail-stream-type 'starttls
+     smtpmail-smtp-service 587)
+
+;; don't keep message buffers around
+(setq message-kill-buffer-on-exit t)
+(setq mail-user-agent 'mu4e-user-agent)
+
+(setq mu4e-update-interval 60) ;; every 1 minute
+(setq mu4e-use-fancy-chars t)
+
+;; show images
+(setq mu4e-show-images t)
+
+;; use imagemagick, if available
+(when (fboundp 'imagemagick-register-types)
+  (imagemagick-register-types))
+
+;; need this to convert some e-mails properly
+(setq mu4e-html2text-command "html2text -utf8 -width 72")
+
+(global-set-key (kbd "C-c m") 'mu4e)
+
+(when (require 'multi-term nil t)
+  (global-set-key (kbd "C-c t") 'multi-term)
+  (global-set-key (kbd "<C-next>") 'multi-term-next)
+  (global-set-key (kbd "<C-prior>") 'multi-term-prev)
+  (setq multi-term-buffer-name "term"
+        multi-term-program "/bin/bash"))
+
+
+(when (require 'term nil t) ; only if term can be loaded..
+  (setq term-bind-key-alist
+        (list (cons "C-c C-c" 'term-interrupt-subjob)
+              (cons "C-n" 'next-line)
+              (cons "M-f" 'term-send-forward-word)
+              (cons "M-b" 'term-send-backward-word)
+              (cons "C-c C-j" 'term-line-mode)
+              (cons "C-c C-k" 'term-char-mode)
+              (cons "M-DEL" 'term-send-backward-kill-word)
+              (cons "M-d" 'term-send-forward-kill-word)
+              (cons "<C-left>" 'term-send-backward-word)
+              (cons "<C-right>" 'term-send-forward-word)
+              (cons "C-r" 'term-send-reverse-search-history)
+              (cons "M-p" 'term-send-raw-meta)
+              (cons "M-y" 'term-send-raw-meta)
+              (cons "C-y" 'term-send-raw))))
+
+(when (require 'term nil t)
+  (defun term-handle-ansi-terminal-messages (message)
+    (while (string-match "\eAnSiT.+\n" message)
+      ;; Extract the command code and the argument.
+      (let* ((start (match-beginning 0))
+             (command-code (aref message (+ start 6)))
+             (argument
+              (save-match-data
+                (substring message
+                           (+ start 8)
+                           (string-match "\r?\n" message
+                                         (+ start 8))))))
+        ;; Delete this command from MESSAGE.
+        (setq message (replace-match "" t t message))
+
+        (cond ((= command-code ?c)
+               (setq term-ansi-at-dir argument))
+              ((= command-code ?h)
+               (setq term-ansi-at-host argument))
+              ((= command-code ?u)
+               (setq term-ansi-at-user argument))
+              ((= command-code ?e)
+               (save-excursion
+                 (find-file-other-window argument)))
+              ((= command-code ?x)
+               (save-excursion
+                 (find-file argument))))))
+
+    (when (and term-ansi-at-host term-ansi-at-dir term-ansi-at-user)
+      (setq buffer-file-name
+            (format "%s@%s:%s" term-ansi-at-user term-ansi-at-host term-ansi-at-dir))
+      (set-buffer-modified-p nil)
+        (setq default-directory (if (string= term-ansi-at-host (system-name))
+                                    (concatenate 'string term-ansi-at-dir "/")
+                                  (format "/%s@%s:%s/" term-ansi-at-user term-ansi-at-host term-ansi-at-dir))))
+    message))
+
+(global-set-key (kbd "C-x s") 'helm-imenu)
+
+(defun full-auto-save ()
+  (interactive)
+  (save-excursion
+    (dolist (buf (buffer-list))
+      (set-buffer buf)
+      (if (and (buffer-file-name) (buffer-modified-p))
+          (basic-save-buffer)))))
+(add-hook 'auto-save-hook 'full-auto-save)
+
+(setq temporary-file-directory "/home/florian/.emacs-auto-save")
+(setq backup-directory-alist
+      `((".*" . ,temporary-file-directory)))
+(setq auto-save-file-name-transforms
+      `((".*" ,temporary-file-directory t)))
+
+(setq bindings '(("C-z" . nil) ; prevents accidental scares
+                 ("C-z z" . suspend-frame)))
+
+(defun bind-key (binding)
+  (let ((key (car binding))
+        (func (cdr binding)))
+    (global-set-key (kbd key) func)))
+
+(mapcar 'bind-key bindings)
+
+(add-hook 'mu4e-compose-mode-hook
+          (defun my-setup-epa-hook ()
+            (epa-mail-mode)))
+
+(add-hook 'mu4e-view-mode-hook
+          (defun my-view-mode-hook ()
+            (epa-mail-mode)))
+
+(load-library "iso-transl")
+
+;; name the signatures "signature.asc"
+(defadvice mml2015-sign (after mml2015-sign-rename (cont) act)
+  (save-excursion
+    (search-backward "Content-Type: application/pgp-signature")
+    (goto-char (point-at-eol))
+    (insert "; name=\"signature.asc\"; description=\"Digital signature\"")))
+
+(projectile-global-mode)
+(setq projectile-completion-system 'helm)
+(helm-projectile-on)
+
+(setq projectile-switch-project-action 'helm-projectile)
+
+;; Close the compilation window if there was no error at all.
+(setq compilation-exit-message-function
+      (lambda (status code msg)
+	;; If M-x compile exists with a 0
+	(when (and (eq status 'exit) (zerop code))
+	  ;; then bury the *compilation* buffer, so that C-x b doesn't go there
+  	  (bury-buffer "*compilation*")
+  	  ;; and return to whatever were looking at before
+  	  (replace-buffer-in-windows "*compilation*"))
+	;; Always return the anticipated result of compilation-exit-message-function
+  	(cons msg code)))
+
+(set-frame-parameter nil 'fullscreen 'fullboth)
+
+(load-theme 'monokai)

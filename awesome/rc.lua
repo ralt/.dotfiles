@@ -16,7 +16,7 @@ require("debian.menu")
 beautiful.init("/usr/share/awesome/themes/default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "urxvtc"
+terminal = "gnome-terminal"
 editor = os.getenv("EDITOR") or "editor"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -299,7 +299,8 @@ for i = 1, keynumber do
                       if client.focus and tags[client.focus.screen][i] then
                           awful.client.toggletag(tags[client.focus.screen][i])
                       end
-                  end))
+                  end)),
+        awful.key({ modkey, "Control" }, "l", function () awful.util.spawn("xscreensaver-command -lock") end)
 end
 
 clientbuttons = awful.util.table.join(
@@ -364,11 +365,9 @@ end)
 client.add_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
-awful.util.spawn_with_shell("run_once gnome-sound-applet")
 awful.util.spawn_with_shell("run_once gnome-settings-daemon")
 awful.util.spawn_with_shell("run_once nm-applet")
 awful.util.spawn_with_shell("run_once set_resolution")
 awful.util.spawn_with_shell("setkeyboard")
-awful.util.spawn_with_shell("/usr/bin/urxvtd -q -f -o")
 awful.util.spawn_with_shell("run_once thunar --daemon")
-awful.util.spawn_with_shell("xrdb -merge ~/.Xresources")
+awful.util.spawn_with_shell("run_once xscreensaver -nosplash")

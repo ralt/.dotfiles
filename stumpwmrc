@@ -8,44 +8,49 @@
   (setf stumpwm:*top-level-error-action* :break)
   (swank:create-server :port 4005
                        :style swank:*communication-style*
-                       :dont-close t)
-  (echo-string (current-screen)
-               "Starting swank. M-x slime-connect RET RET, then (in-package stumpwm)."))
+                       :dont-close t))
 (swank)
 
-(stumpwm:run-shell-command "set_resolution")
-(stumpwm:run-shell-command "setxkbmap -option ctrl:nocaps")
+;(stumpwm:run-shell-command "set_resolution")
+(stumpwm:run-shell-command "setkeyboard &")
+(stumpwm:run-shell-command "xscreensaver &")
 
 ;; how many seconds elapse between each update of the modeline
-(setf *mode-line-timeout* 1) ; must be set *before* turning on the modeline
-(mode-line)
+;(setf *mode-line-timeout* 1) ; must be set *before* turning on the modeline
+;(mode-line)
 
 ;; Turn on the modeline
-(if (not (head-mode-line (current-head)))
-     (toggle-mode-line (current-screen) (current-head)))
+;(if (not (head-mode-line (current-head)))
+;     (toggle-mode-line (current-screen) (current-head)))
+
+(defcommand my/toggle-mode-line () ()
+  "toggle the modeline"
+  (toggle-mode-line (current-screen) (current-head)))
 
 ;; Show time, cpu usage and network traffic in the modeline
 (setf *screen-mode-line-format*
       (list '(:eval (run-shell-command "date '+%R, %F %a'|tr -d [:cntrl:]" t)) " [^B%n^b] %W"))
 
-(stumpwm:set-prefix-key (stumpwm:kbd "C-t"))
-
-(defun banish-on-focus (cur last)
-  (declare (ignore last))
-  (multiple-value-bind (x y)
-      (xlib:global-pointer-position *display*)
-    (unless (eq cur (find-frame (current-group) x y))
-      (banish))))
-
-(add-hook *focus-frame-hook* 'banish-on-focus)
-
 (defcommand google-chrome () ()
   "run google chrome"
   (run-or-raise "google-chrome" '(:class "Google-chrome")))
 
+(defcommand chromium-browser () ()
+  "run chromium-browser"
+  (run-or-raise "chromium-browser" '(:class "Chromium-browser")))
+
+(defcommand hipchat () ()
+  "run hipchat"
+  (run-or-raise "hipchat" '(:instance "hipchat")))
+
+(defcommand skype () ()
+  "run skype"
+  (run-or-raise "skype" '(:instance "skype")))
+
+;; Shortcut to lock the screen
 (defcommand lock () ()
-  "locks the pc"
-  (run-shell-command "lock"))
+  "lock the screen"
+  (run-or-raise "xscreensaver-command -lock" '(:instance "xscreensaver")))
 
 (defcommand veille () ()
   "puts the pc in veille"
@@ -84,6 +89,8 @@
             (kbd (format nil "s-~d" i))
             (format nil "select-window-by-number ~d" i)))
 
+(define-key *top-map* (kbd "s-q") "windowlist")
+
 ;; Navigation
 (define-key *top-map* (kbd "s-ESC") "gother")
 (define-key *top-map* (kbd "s-n") "next")
@@ -106,3 +113,44 @@
 (setf *frame-number-map* "1234567890")
 
 (define-key *top-map* (kbd "s-`") "other")
+
+(ql:quickload 'simpletray)
+
+(defcommand tray-create-and-nm () ()
+  "creates a tray and puts nm-applet on it"
+  (simpletray:create)
+  (run-shell-command "nm-applet &"))
+
+(defcommand tray-destroy () ()
+  "destroys the tray"
+  (simpletray:destroy))
+
+(defcommand setkeyboard () ()
+  "sets the keyboard"
+  (run-shell-command "setkeyboard"))
+
+;(stumpwm:run-shell-command "gnome-sound-applet &")
+;(stumpwm:run-shell-command "gnome-settings-daemon &")
+
+;; Volume controls
+(define-keysym #x1008ff11 "XF86AudioLowerVolume")
+(define-keysym #x1008ff12 "XF86AudioMute")
+(define-keysym #x1008ff13 "XF86AudioRaiseVolume")
+;; Volume control
+(define-key stumpwm:*top-map* (stumpwm:kbd "XF86AudioLowerVolume") "exec amixer set Master 5%-")
+(define-key stumpwm:*top-map* (stumpwm:kbd "XF86AudioRaiseVolume") "exec amixer set Master 5%+")
+(define-key stumpwm:*top-map* (stumpwm:kbd "XF86AudioMute") "exec /home/florian/bin/domute.sh")
+
+(defun read-file (file)
+  (let ((fields (make-hash-table :test #'equal)))
+    (with-open-file (f file)
+      (do ((line (read-line f nil nil) (read-line f nil nil)))
+	  ((null line) fields)
+	(let ((split (cl-ppcre:split ":\\s*" line)))
+	  (setf (gethash (string-trim '(#\Space) (car split)) fields)
+		(string-trim '(#\Space) (cadr split))))))
+    (first (alexandria:hash-table-keys fields))))
+
+(defcommand battery () ()
+  "shows battery usage"
+  (message "~A ~A%" (read-file "/sys/class/power_supply/BAT0/status") (read-file "/sys/class/power_supply/BAT0/capacity")))
