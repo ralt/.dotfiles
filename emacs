@@ -668,6 +668,60 @@
 	;; Always return the anticipated result of compilation-exit-message-function
   	(cons msg code)))
 
-(set-frame-parameter nil 'fullscreen 'fullboth)
+(set-frame-parameter nil 'fullscreen 'maximized)
 
 (load-theme 'monokai)
+
+;; srsly
+(setq browse-url-browser-function 'eww-browse-url)
+
+(eval-after-load "eww"
+  '(progn (define-key eww-mode-map "f" 'eww-lnum-follow)
+          (define-key eww-mode-map "F" 'eww-lnum-universal)))
+
+(add-hook 'after-init-hook 'global-company-mode)
+
+(add-to-list 'auto-mode-alist (cons "\\.paren\\'" 'lisp-mode))
+(add-hook 'lisp-mode-hook
+          #'(lambda ()
+              (when (and buffer-file-name
+                         (string-match-p "\\.paren\\>" buffer-file-name))
+                (unless (slime-connected-p)
+                  (save-excursion (slime)))
+                (trident-mode +1))))
+
+(add-hook 'lisp-mode-hook #'rainbow-delimiters-mode-enable)
+(add-hook 'emacs-lisp-mode #'rainbow-delimiters-mode-enable)
+
+(require 'trident-mode)
+(trident-add-keys-with-prefix "C-c C-e")
+
+(setq ispell-dictionary "francais")
+
+(defun djcb-popup (title msg &optional icon sound)
+  "Show a popup if we're on X, or echo it otherwise; TITLE is the title
+of the message, MSG is the context. Optionally, you can provide an ICON and
+a sound to be played"
+
+  (interactive)
+  (when sound (shell-command
+                (concat "mplayer -really-quiet " sound " 2> /dev/null")))
+  (if (eq window-system 'x)
+    (shell-command (concat "notify-send "
+
+                     (if icon (concat "-i " icon) "")
+                     " '" title "' '" msg "'"))
+    ;; text only version
+    (message (concat title ": " msg))))
+
+(add-hook 'mu4e-index-updated-hook
+	  (defun new-mail ()
+	    (djcb-popup "mu4e" "mu4e has updated your e-mails.")))
+
+
+;; Notify my when someone mentions my nick.
+(defun erc-global-notify (matched-type nick msg)
+  (interactive)
+  (when (eq matched-type 'current-nick)
+    (djcb-popup "erc" (concat (car split-string nick "!") " mentioned you: " msg))))
+(add-hook 'erc-text-matched-hook 'erc-global-notify)
