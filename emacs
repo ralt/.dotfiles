@@ -20,6 +20,7 @@
       '(markdown-mode
       color-theme
       color-theme-solarized
+      company
       monokai-theme
       paredit
       php-mode
@@ -30,9 +31,9 @@
       org
       go-mode
       dtrt-indent
-      auto-complete
       ac-helm
       helm
+      rainbow-delimiters
       helm-dash
       powerline
       aggressive-indent
@@ -121,7 +122,7 @@
        :nick "Ralt"
        :full-name "Ralt"))
 
-(setq erc-autojoin-channels-alist '(("freenode.net" "#lisp" "#promises" "#sojavascript" "#lispweb" "#emacs" "#reckict" "#drupal-commerce")))
+(setq erc-autojoin-channels-alist '(("freenode.net" "#lisp" "#promises" "#sojavascript" "#lispweb" "#emacs" "#lispkit")))
 
 (setq starttls-use-gnutls t)
 (setq starttls-gnutls-program "gnutls-cli")
@@ -457,6 +458,8 @@
 (setq mu4e-get-mail-command "offlineimap")
 
 (setq mu4e-headers-skip-duplicates t)
+(setq mu4e-hide-index-messages t)
+(setq mu4e-view-show-addresses t)
 
 ;; something about ourselves
 (setq
@@ -531,6 +534,8 @@
 
 (setq mu4e-update-interval 60) ;; every 1 minute
 (setq mu4e-use-fancy-chars t)
+
+(add-hook 'mu4e-compose-mode-hook 'flyspell-mode)
 
 ;; show images
 (setq mu4e-show-images t)
@@ -640,6 +645,10 @@
 (add-hook 'mu4e-view-mode-hook
           (defun my-view-mode-hook ()
             (epa-mail-mode)))
+
+(setq mu4e-view-show-images t)
+(setq mu4e-html2text-command "w3m -dump -T text/html")
+(setq mu4e-view-prefer-html t)
 
 (load-library "iso-transl")
 
