@@ -89,7 +89,7 @@
             (kbd (format nil "s-~d" i))
             (format nil "select-window-by-number ~d" i)))
 
-(define-key *top-map* (kbd "s-q") "windowlist")
+(define-key *root-map* (kbd "C-t") "windowlist")
 
 ;; Navigation
 (define-key *top-map* (kbd "s-ESC") "gother")
@@ -154,3 +154,11 @@
 (defcommand battery () ()
   "shows battery usage"
   (message "~A ~A%" (read-file "/sys/class/power_supply/BAT0/status") (read-file "/sys/class/power_supply/BAT0/capacity")))
+
+(defcommand head-windowlist () ()
+  "shows the list of windows on a single head"
+  (select-window-from-menu
+   (head-windows (current-group) (current-head))
+   *window-format*))
+
+(define-key *root-map* (kbd "C-r") "head-windowlist")

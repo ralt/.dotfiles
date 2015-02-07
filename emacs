@@ -732,5 +732,8 @@ a sound to be played"
 (defun erc-global-notify (matched-type nick msg)
   (interactive)
   (when (eq matched-type 'current-nick)
-    (djcb-popup "erc" (concat (car split-string nick "!") " mentioned you: " msg))))
-(add-hook 'erc-text-matched-hook 'erc-global-notify)
+    (djcb-popup "erc" (concat (car (split-string nick "!")) " mentioned you: " msg))))
+;(add-hook 'erc-text-matched-hook 'erc-global-notify)
+
+(load "~/quicklisp/log4slime-setup.el")
+(global-log4slime-mode 1)
