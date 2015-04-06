@@ -31,21 +31,18 @@
       org
       go-mode
       dtrt-indent
-      ac-helm
-      helm
       rainbow-delimiters
-      helm-dash
       powerline
       aggressive-indent
       magit
       async
       epl
       f
+      smex
       gh
       gist
       git-commit-mode
       git-rebase-mode
-      helm-projectile
       htmlfontify
       makey
       multi-term
@@ -77,7 +74,7 @@
 (setq-default highlight-tabs t)
 
 ;; Remove useless whitespaces before saving a file
-;;(add-hook 'before-save-hook 'whitespace-cleanup)
+(add-hook 'before-save-hook 'whitespace-cleanup)
 
 ;80 characters ftw
 (add-to-list 'default-frame-alist '(width . 80))
@@ -108,6 +105,7 @@
 
 (load (expand-file-name "~/quicklisp/slime-helper.el"))
 (setq inferior-lisp-program "/usr/bin/sbcl")
+(setenv "SBCL_HOME" "/usr/lib/sbcl")
 
 (show-paren-mode t)
 
@@ -196,8 +194,10 @@
      (:from . 22)
      (:subject))))
  '(org-agenda-files (quote ("~/Org/tasks.org")))
- '(org-support-shift-select t))
-
+ '(org-support-shift-select t)
+ ;; '(smtpmail-smtp-server "smtp.gmail2.com")
+ ;; '(smtpmail-smtp-service 587))
+ )
 (global-set-key (kbd "C-x <up>") 'windmove-up)
 (global-set-key (kbd "C-x <down>") 'windmove-down)
 (global-set-key (kbd "C-x <right>") 'windmove-right)
@@ -292,7 +292,6 @@
 
 (define-key global-map (kbd "<C-tab>") 'php-complete-function)
 
-(setq gnus-show-all-headers t)
 (setq message-cite-reply-position 'above)
 
 (add-hook 'makefile-mode-hook 'indent-tabs-mode)
@@ -339,8 +338,6 @@
 (dtrt-indent-mode 1)
 (setq dtrt-indent-min-indent-superiority 50)
 
-(require 'helm-config)
-
 ;; Necessary before emacs 24.4
 (unless (fboundp 'hash-table-values)
   (defun hash-table-values (hashtable)
@@ -361,46 +358,9 @@
       (maphash (lambda (kk _vv) (push kk allkeys)) hashtable)
       allkeys)))
 
-(global-set-key (kbd "M-x") 'helm-M-x)
-(global-set-key (kbd "C-x C-f") 'helm-find-files)
-(global-set-key (kbd "C-x b") 'helm-buffers-list)
-(global-set-key (kbd "M-g s") 'helm-do-grep)
-
-(require 'ac-helm)
-(auto-complete-mode t)
-(global-set-key (kbd "C-:") 'ac-complete-with-helm)
-(define-key ac-complete-mode-map (kbd "C-:") 'ac-complete-with-helm)
-
-(defun drupal-doc ()
-  (interactive)
-  (setq-local helm-dash-docsets '("Drupal" "PHP")))
-
-(global-set-key (kbd "C-h C-k f") 'helm-dash)
-(global-set-key (kbd "C-h C-k g") 'helm-dash-at-point)
-
-(defun jwintz/dash-path (docset)
-  (if (string= docset "OpenGL_2")
-      (concat (concat helm-dash-docsets-path "/") "OpenGL2.docset")
-    (if (string= docset "OpenGL_3")
-        (concat (concat helm-dash-docsets-path "/") "OpenGL3.docset")
-      (if (string= docset "OpenGL_4")
-          (concat (concat helm-dash-docsets-path "/") "OpenGL4.docset")
-        (if (string= docset "Emacs_Lisp")
-            (concat (concat helm-dash-docsets-path "/") "Emacs Lisp.docset")
-          (concat
-            (concat
-             (concat
-              (concat helm-dash-docsets-path "/")
-              (nth 0 (split-string docset "_")))) ".docset"))))))
-
-(defun jwintz/dash-install (docset)
-  (unless (file-exists-p (jwintz/dash-path docset))
-    (helm-dash-install-docset docset)))
-
-(setq helm-dash-docsets-path (format "%s/.emacs.d/docsets" (getenv "HOME")))
-
-(jwintz/dash-install "PHP")
-(jwintz/dash-install "Drupal")
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "C-x C-f") 'ido-find-file)
+(global-set-key (kbd "C-x b") 'ido-switch-buffer)
 
 (setq browse-url-browser-function 'eww-browse-url)
 (setq current-browser "eww")
@@ -409,16 +369,16 @@
   (interactive)
   (if (string= current-browser "eww")
       (progn
-        (setq browse-url-browser-function 'browse-url-generic browse-url-generic-program "google-chrome")
-        (setq current-browser "google-chrome")
-        (message "Switching to google-chrome"))
+        (setq browse-url-browser-function 'browse-url-generic browse-url-generic-program "chromium-browser")
+        (setq current-browser "chromium-browser")
+        (message "Switching to chromium-browser"))
     (progn
       (setq browse-url-browser-function 'eww-browse-url)
       (setq current-browser "eww")
       (message "Switching to eww"))))
 
-(require 'powerline)
-(powerline-default-theme)
+;(require 'powerline)
+;(powerline-default-theme)
 
 ;; source: http://steve.yegge.googlepages.com/my-dot-emacs-file
 (defun rename-file-and-buffer (new-name)
@@ -436,118 +396,114 @@
           (set-visited-file-name new-name)
           (set-buffer-modified-p nil))))))
 
-(add-to-list 'load-path "/home/florian/mu-0.9.9.6/mu4e")
+;; (add-to-list 'load-path "/home/florian/mu-0.9.9.6/mu4e")
 
-(require 'mu4e)
+;; (require 'mu4e)
 
-;; default
+;; ;; default
 ;; (setq mu4e-maildir "~/Maildir")
 
-;; setup some handy shortcuts
-;; you can quickly switch to your Inbox -- press ``ji''
-;; then, when you want archive some messages, move them to
-;; the 'All Mail' folder by pressing ``ma''.
+;; ;; setup some handy shortcuts
+;; ;; you can quickly switch to your Inbox -- press ``ji''
+;; ;; then, when you want archive some messages, move them to
+;; ;; the 'All Mail' folder by pressing ``ma''.
 
-(setq mu4e-maildir-shortcuts
-    '( ("/Work/INBOX"               . ?i)
-       ("/Work/[Gmail].Sent Mail"   . ?s)
-       ("/Personal/INBOX" . ?u)
-       ("/Personal/[Gmail].Sent Mail" . ?a)))
+;; (setq mu4e-maildir-shortcuts
+;;     '( ("/Work/inbox"               . ?i)
+;;        ("/Work/sent"   . ?s)
+;;        ("/Personal/inbox" . ?u)
+;;        ("/Personal/sent" . ?a)))
 
-;; allow for updating mail using 'U' in the main view:
-(setq mu4e-get-mail-command "offlineimap")
+;; ;; allow for updating mail using 'U' in the main view:
+;; (setq mu4e-get-mail-command "mbsync -a")
 
-(setq mu4e-headers-skip-duplicates t)
-(setq mu4e-hide-index-messages t)
-(setq mu4e-view-show-addresses t)
+;; (setq mu4e-headers-skip-duplicates t)
+;; (setq mu4e-hide-index-messages t)
+;; (setq mu4e-view-show-addresses t)
 
-;; something about ourselves
-(setq
-   user-mail-address "florian.margaine@commerceguys.com"
-   user-full-name  "Florian Margaine"
-   )
+;; ;; something about ourselves
+;; (setq
+;;    user-mail-address "florian.margaine@commerceguys.com"
+;;    user-full-name  "Florian Margaine"
+;;    )
 
-;; sending mail -- replace USERNAME with your gmail username
-;; also, make sure the gnutls command line utils are installed
-;; package 'gnutls-bin' in Debian/Ubuntu
+;; ;; sending mail -- replace USERNAME with your gmail username
+;; ;; also, make sure the gnutls command line utils are installed
+;; ;; package 'gnutls-bin' in Debian/Ubuntu
 
-(require 'smtpmail)
+;; (require 'smtpmail)
 
-(defvar my-mu4e-account-alist
-  '(("Work"
-     (mu4e-sent-folder "/Work/[Gmail].Sent Mail")
-     (mu4e-drafts-folder "/Work/[Gmail].Drafts")
-     (setq mu4e-trash-folder  "/Work/[Gmail].Trash")
-     (user-mail-address "florian.margaine@commerceguys.com")
-     (smtpmail-local-domain "commerceguys.com")
-     (smtpmail-default-smtp-server "smtp.gmail1.com")
-     (smtpmail-smtp-server "smtp.gmail1.com")
-     (mu4e-compose-signature
-      (concat
-       "Florian Margaine\n"
-       "\n"
-       "Drupal dev @ Commerce Guys\n"
-       "http://commerceguys.com\n"
-       "\n"
-       "Tel: +33 (0) 9 81 89 67 42\n")))
-    ("Personal"
-     (mu4e-sent-folder "/Personal/[Gmail].Sent Mail")
-     (mu4e-drafts-folder "/Personal/[Gmail].Drafts")
-     (setq mu4e-trash-folder  "/Personal/[Gmail].Trash")
-     (user-mail-address "florian@margaine.com")
-     (smtpmail-local-domain "margaine.com")
-     (smtpmail-default-smtp-server "smtp.gmail2.com")
-     (smtpmail-smtp-server "smtp.gmail2.com")
-     (mu4e-compose-signature
-      (concat
-       "Florian Margaine\n")))))
+;; (defvar my-mu4e-account-alist
+;;   '(("Work"
+;;      (mu4e-sent-folder "/Work/sent")
+;;      (user-mail-address "florian.margaine@commerceguys.com")
+;;      (smtpmail-local-domain "commerceguys.com")
+;;      (smtpmail-default-smtp-server "smtp.gmail1.com")
+;;      (smtpmail-smtp-server "smtp.gmail1.com")
+;;      (mu4e-compose-signature
+;;       (concat
+;;        "Florian Margaine\n"
+;;        "\n"
+;;        "Drupal dev @ Commerce Guys\n"
+;;        "http://commerceguys.com\n"
+;;        "\n"
+;;        "Tel: +33 (0) 9 81 89 67 42\n")))
+;;     ("Personal"
+;;      (mu4e-sent-folder "/Personal/sent")
+;;      (user-mail-address "florian@margaine.com")
+;;      (smtpmail-local-domain "margaine.com")
+;;      (smtpmail-default-smtp-server "smtp.gmail2.com")
+;;      (smtpmail-smtp-server "smtp.gmail2.com")
+;;      (mu4e-compose-signature
+;;       (concat
+;;        "Florian Margaine\n")))))
 
-(defun my-mu4e-set-account ()
-  "Set the account for composing a message."
-  (let* ((account
-          (if mu4e-compose-parent-message
-              (let ((maildir (mu4e-message-field mu4e-compose-parent-message :maildir)))
-                (string-match "/\\(.*?\\)/" maildir)
-                (match-string 1 maildir))
-            (completing-read (format "Compose with account: (%s) "
-                                     (mapconcat #'(lambda (var) (car var))
-                                                my-mu4e-account-alist "/"))
-                             (mapcar #'(lambda (var) (car var)) my-mu4e-account-alist)
-                             nil t nil nil (caar my-mu4e-account-alist))))
-         (account-vars (cdr (assoc account my-mu4e-account-alist))))
-    (if account-vars
-        (mapc #'(lambda (var)
-                  (set (car var) (cadr var)))
-              account-vars)
-      (error "No email account found"))))
+;; (defun my-mu4e-set-account ()
+;;   "Set the account for composing a message."
+;;   (let* ((account
+;;           (if mu4e-compose-parent-message
+;;               (let ((maildir (mu4e-message-field mu4e-compose-parent-message :maildir)))
+;;                 (string-match "/\\(.*?\\)/" maildir)
+;;                 (match-string 1 maildir))
+;;             (completing-read (format "Compose with account: (%s) "
+;;                                      (mapconcat #'(lambda (var) (car var))
+;;                                                 my-mu4e-account-alist "/"))
+;;                              (mapcar #'(lambda (var) (car var)) my-mu4e-account-alist)
+;;                              nil t nil nil (caar my-mu4e-account-alist))))
+;;          (account-vars (cdr (assoc account my-mu4e-account-alist))))
+;;     (if account-vars
+;;         (mapc #'(lambda (var)
+;;                   (set (car var) (cadr var)))
+;;               account-vars)
+;;       (error "No email account found"))))
 
-(add-hook 'mu4e-compose-pre-hook 'my-mu4e-set-account)
+;; (add-hook 'mu4e-compose-pre-hook 'my-mu4e-set-account)
 
-;; alternatively, for emacs-24 you can use:
-(setq message-send-mail-function 'smtpmail-send-it
-     smtpmail-stream-type 'starttls
-     smtpmail-smtp-service 587)
+;; ;; alternatively, for emacs-24 you can use:
+;; (setq message-send-mail-function 'smtpmail-send-it
+;;      smtpmail-stream-type 'starttls
+;;      smtpmail-smtp-service 587)
 
 ;; don't keep message buffers around
 (setq message-kill-buffer-on-exit t)
-(setq mail-user-agent 'mu4e-user-agent)
+;(setq mail-user-agent 'mu4e-user-agent)
 
-(setq mu4e-update-interval 60) ;; every 1 minute
-(setq mu4e-use-fancy-chars t)
+;(setq mu4e-update-interval 60) ;; every 1 minute
+;(setq mu4e-use-fancy-chars t)
 
-(add-hook 'mu4e-compose-mode-hook 'flyspell-mode)
+;(add-hook 'mu4e-compose-mode-hook 'flyspell-mode)
 
 ;; show images
-(setq mu4e-show-images t)
+;(setq mu4e-show-images t)
 
 ;; use imagemagick, if available
 (when (fboundp 'imagemagick-register-types)
   (imagemagick-register-types))
 
 ;; need this to convert some e-mails properly
-(setq mu4e-html2text-command "html2text -utf8 -width 72")
+;(setq mu4e-html2text-command "html2text -utf8 -width 72")
 
-(global-set-key (kbd "C-c m") 'mu4e)
+;(global-set-key (kbd "C-c m") 'mu4e)
 
 (when (require 'multi-term nil t)
   (global-set-key (kbd "C-c t") 'multi-term)
@@ -611,7 +567,7 @@
                                   (format "/%s@%s:%s/" term-ansi-at-user term-ansi-at-host term-ansi-at-dir))))
     message))
 
-(global-set-key (kbd "C-x s") 'helm-imenu)
+(global-set-key (kbd "C-x s") 'imenu)
 
 (defun full-auto-save ()
   (interactive)
@@ -638,17 +594,17 @@
 
 (mapcar 'bind-key bindings)
 
-(add-hook 'mu4e-compose-mode-hook
-          (defun my-setup-epa-hook ()
-            (epa-mail-mode)))
+;; (add-hook 'mu4e-compose-mode-hook
+;;           (defun my-setup-epa-hook ()
+;;             (epa-mail-mode)))
 
-(add-hook 'mu4e-view-mode-hook
-          (defun my-view-mode-hook ()
-            (epa-mail-mode)))
+;; (add-hook 'mu4e-view-mode-hook
+;;           (defun my-view-mode-hook ()
+;;             (epa-mail-mode)))
 
-(setq mu4e-view-show-images t)
-(setq mu4e-html2text-command "w3m -dump -T text/html")
-(setq mu4e-view-prefer-html t)
+;; (setq mu4e-view-show-images t)
+;; (setq mu4e-html2text-command "w3m -dump -T text/html")
+;; (setq mu4e-view-prefer-html t)
 
 (load-library "iso-transl")
 
@@ -659,36 +615,25 @@
     (goto-char (point-at-eol))
     (insert "; name=\"signature.asc\"; description=\"Digital signature\"")))
 
-(projectile-global-mode)
-(setq projectile-completion-system 'helm)
-(helm-projectile-on)
-
-(setq projectile-switch-project-action 'helm-projectile)
-
 ;; Close the compilation window if there was no error at all.
 (setq compilation-exit-message-function
       (lambda (status code msg)
-	;; If M-x compile exists with a 0
-	(when (and (eq status 'exit) (zerop code))
-	  ;; then bury the *compilation* buffer, so that C-x b doesn't go there
-  	  (bury-buffer "*compilation*")
-  	  ;; and return to whatever were looking at before
-  	  (replace-buffer-in-windows "*compilation*"))
-	;; Always return the anticipated result of compilation-exit-message-function
-  	(cons msg code)))
+        ;; If M-x compile exists with a 0
+        (when (and (eq status 'exit) (zerop code))
+          ;; then bury the *compilation* buffer, so that C-x b doesn't go there
+          (bury-buffer "*compilation*")
+          ;; and return to whatever were looking at before
+          (replace-buffer-in-windows "*compilation*"))
+        ;; Always return the anticipated result of compilation-exit-message-function
+        (cons msg code)))
 
 (set-frame-parameter nil 'fullscreen 'maximized)
 
-(load-theme 'monokai)
-
-;; srsly
 (setq browse-url-browser-function 'eww-browse-url)
 
 (eval-after-load "eww"
   '(progn (define-key eww-mode-map "f" 'eww-lnum-follow)
           (define-key eww-mode-map "F" 'eww-lnum-universal)))
-
-(add-hook 'after-init-hook 'global-company-mode)
 
 (add-to-list 'auto-mode-alist (cons "\\.paren\\'" 'lisp-mode))
 (add-hook 'lisp-mode-hook
@@ -707,33 +652,137 @@
 
 (setq ispell-dictionary "francais")
 
-(defun djcb-popup (title msg &optional icon sound)
-  "Show a popup if we're on X, or echo it otherwise; TITLE is the title
-of the message, MSG is the context. Optionally, you can provide an ICON and
-a sound to be played"
+;(load "~/quicklisp/log4slime-setup.el")
+;(global-log4slime-mode 1)
 
+(setq-default indent-tabs-mode nil)
+
+(ido-mode)
+(put 'narrow-to-page 'disabled nil)
+
+
+(autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
+
+(add-hook 'emacs-lisp-mode-hook #'(lambda ()
+                                    (enable-paredit-mode)
+                                    (prettify-symbols-mode t)
+                                    (push '(">=" . ?≥) prettify-symbols-alist)
+                                    (push '("<=" . ?≤) prettify-symbols-alist)
+                                    (rainbow-delimiters-mode t)))
+
+(add-hook 'eval-expression-minibuffer-setup-hook #'(lambda ()
+                                                     (enable-paredit-mode)
+                                                     (prettify-symbols-mode t)
+                                                     (push '(">=" . ?≥) prettify-symbols-alist)
+                                                     (push '("<=" . ?≤) prettify-symbols-alist)
+                                                     (rainbow-delimiters-mode t)))
+
+(add-hook 'ielm-mode-hook #'(lambda ()
+                              (enable-paredit-mode)
+                              (prettify-symbols-mode t)
+                              (push '(">=" . ?≥) prettify-symbols-alist)
+                              (push '("<=" . ?≤) prettify-symbols-alist)
+                              (rainbow-delimiters-mode t)))
+
+(add-hook 'lisp-mode-hook #'(lambda ()
+                              (enable-paredit-mode)
+                              (prettify-symbols-mode t)
+                              (push '(">=" . ?≥) prettify-symbols-alist)
+                              (push '("<=" . ?≤) prettify-symbols-alist)
+                              (rainbow-delimiters-mode t)))
+
+(add-hook 'lisp-interaction-mode-hook #'(lambda ()
+                                          (enable-paredit-mode)
+                                          (prettify-symbols-mode t)
+                                          (push '(">=" . ?≥) prettify-symbols-alist)
+                                          (push '("<=" . ?≤) prettify-symbols-alist)
+                                          (rainbow-delimiters-mode t)))
+
+(load-theme 'monokai)
+
+(defun curr-dir-git-branch-string (pwd)
+  "Returns current git branch as a string, or the empty string if
+PWD is not in a git repo (or the git command is not found)."
   (interactive)
-  (when sound (shell-command
-                (concat "mplayer -really-quiet " sound " 2> /dev/null")))
-  (if (eq window-system 'x)
-    (shell-command (concat "notify-send "
+  (when (and (eshell-search-path "git")
+             (locate-dominating-file pwd ".git"))
+    (let ((git-output (shell-command-to-string (concat "cd " pwd " && git branch | grep '\\*' | sed -e 's/^\\* //'"))))
+      (concat "["
+              (if (> (length git-output) 0)
+                  (substring git-output 0 -1)
+                "(no branch)")
+              "]"))))
 
-                     (if icon (concat "-i " icon) "")
-                     " '" title "' '" msg "'"))
-    ;; text only version
-    (message (concat title ": " msg))))
+(setq eshell-history-size 1024)
+(setq eshell-prompt-regexp "^[^#$]*[#$] ")
 
-(add-hook 'mu4e-index-updated-hook
-	  (defun new-mail ()
-	    (djcb-popup "mu4e" "mu4e has updated your e-mails.")))
+(load "em-hist")           ; So the history vars are defined
+(if (boundp 'eshell-save-history-on-exit)
+    (setq eshell-save-history-on-exit t)) ; Don't ask, just save
+;(message "eshell-ask-to-save-history is %s" eshell-ask-to-save-history)
+(if (boundp 'eshell-ask-to-save-history)
+    (setq eshell-ask-to-save-history 'always)) ; For older(?) version
+;(message "eshell-ask-to-save-history is %s" eshell-ask-to-save-history)
+
+(defun eshell/ef (fname-regexp &rest dir) (ef fname-regexp default-directory))
 
 
-;; Notify my when someone mentions my nick.
-(defun erc-global-notify (matched-type nick msg)
+;;; ---- path manipulation
+
+(defun pwd-repl-home (pwd)
   (interactive)
-  (when (eq matched-type 'current-nick)
-    (djcb-popup "erc" (concat (car (split-string nick "!")) " mentioned you: " msg))))
-;(add-hook 'erc-text-matched-hook 'erc-global-notify)
+  (let* ((home (expand-file-name (getenv "HOME")))
+   (home-len (length home)))
+    (if (and
+   (>= (length pwd) home-len)
+   (equal home (substring pwd 0 home-len)))
+  (concat "~" (substring pwd home-len))
+      pwd)))
 
-(load "~/quicklisp/log4slime-setup.el")
-(global-log4slime-mode 1)
+(defun curr-dir-git-branch-string (pwd)
+  "Returns current git branch as a string, or the empty string if
+PWD is not in a git repo (or the git command is not found)."
+  (interactive)
+  (when (and (eshell-search-path "git")
+             (locate-dominating-file pwd ".git"))
+    (let ((git-output (shell-command-to-string (concat "cd " pwd " && git branch | grep '\\*' | sed -e 's/^\\* //'"))))
+      (propertize (concat "["
+              (if (> (length git-output) 0)
+                  (substring git-output 0 -1)
+                "(no branch)")
+              "]") 'face `(:foreground "green"))
+      )))
+
+(setq eshell-prompt-function
+      (lambda ()
+        (concat
+         (propertize ((lambda (p-lst)
+            (if (> (length p-lst) 3)
+                (concat
+                 (mapconcat (lambda (elm) (if (zerop (length elm)) ""
+                                            (substring elm 0 1)))
+                            (butlast p-lst 3)
+                            "/")
+                 "/"
+                 (mapconcat (lambda (elm) elm)
+                            (last p-lst 3)
+                            "/"))
+              (mapconcat (lambda (elm) elm)
+                         p-lst
+                         "/")))
+          (split-string (pwd-repl-home (eshell/pwd)) "/")) 'face `(:foreground "yellow"))
+         (or (curr-dir-git-branch-string (eshell/pwd)))
+         (propertize "# " 'face 'default))))
+(defun pwd-repl-home (pwd)
+  (interactive)
+  (let* ((home (expand-file-name (getenv "HOME")))
+         (home-len (length home)))
+    (if (and
+         (>= (length pwd) home-len)
+         (equal home (substring pwd 0 home-len)))
+        (concat "~" (substring pwd home-len))
+      pwd)))
+
+(setq eshell-highlight-prompt nil)
+
+(setq magit-log-show-gpg-status t)

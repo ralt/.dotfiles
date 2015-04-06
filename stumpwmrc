@@ -14,6 +14,7 @@
 ;(stumpwm:run-shell-command "set_resolution")
 (stumpwm:run-shell-command "setkeyboard &")
 (stumpwm:run-shell-command "xscreensaver &")
+(stumpwm:run-shell-command "xmodmap /home/florian/.Xmodmap")
 
 ;; how many seconds elapse between each update of the modeline
 ;(setf *mode-line-timeout* 1) ; must be set *before* turning on the modeline
@@ -145,10 +146,10 @@
   (let ((fields (make-hash-table :test #'equal)))
     (with-open-file (f file)
       (do ((line (read-line f nil nil) (read-line f nil nil)))
-	  ((null line) fields)
-	(let ((split (cl-ppcre:split ":\\s*" line)))
-	  (setf (gethash (string-trim '(#\Space) (car split)) fields)
-		(string-trim '(#\Space) (cadr split))))))
+          ((null line) fields)
+        (let ((split (cl-ppcre:split ":\\s*" line)))
+          (setf (gethash (string-trim '(#\Space) (car split)) fields)
+                (string-trim '(#\Space) (cadr split))))))
     (first (alexandria:hash-table-keys fields))))
 
 (defcommand battery () ()
