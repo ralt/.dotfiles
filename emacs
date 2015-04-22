@@ -1,9 +1,3 @@
-(defvar *projects* (make-hash-table :test 'equal))
-
-(puthash "cso" "/home/flmar/lxc/total-cso/var/www/total-cso" *projects*)
-(puthash "labs" "/home/flmar/lxc/cera-labs/var/www/cera-labs" *projects*)
-(puthash "mpi" "/home/flmar/lxc/cera-mesprojetsimmobiliers/var/www/cera-mesprojetsimmobiliers" *projects*)
-
 (require 'package)
 (add-to-list 'package-archives
          '("marmalade" .
@@ -48,6 +42,7 @@
       multi-term
       names
       projectile
+      trident-mode
       web-mode)
       "List of packages needs to be installed at launch")
 
@@ -104,8 +99,8 @@
 ;...by any means necessary
 
 (load (expand-file-name "~/quicklisp/slime-helper.el"))
-(setq inferior-lisp-program "/usr/bin/sbcl")
-(setenv "SBCL_HOME" "/usr/lib/sbcl")
+(setq inferior-lisp-program "sbcl")
+;(setenv "SBCL_HOME" "/usr/lib/sbcl")
 
 (show-paren-mode t)
 
@@ -177,7 +172,7 @@
  '(browse-url-browser-function (quote browse-url-default-browser))
  '(custom-safe-themes
    (quote
-    ("4e262566c3d57706c70e403d440146a5440de056dfaeb3062f004da1711d83fc" "de2c46ed1752b0d0423cde9b6401062b67a6a1300c068d5d7f67725adc6c3afb" "41b6698b5f9ab241ad6c30aea8c9f53d539e23ad4e3963abff4b57c0f8bf6730" "51bea7765ddaee2aac2983fac8099ec7d62dff47b708aa3595ad29899e9e9e44" "f41fd682a3cd1e16796068a2ca96e82cfd274e58b978156da0acce4d56f2b0d5" "405fda54905200f202dd2e6ccbf94c1b7cc1312671894bc8eca7e6ec9e8a41a2" "e53cc4144192bb4e4ed10a3fa3e7442cae4c3d231df8822f6c02f1220a0d259a" "978ff9496928cc94639cb1084004bf64235c5c7fb0cfbcc38a3871eb95fa88f6" "ae8d0f1f36460f3705b583970188e4fbb145805b7accce0adb41031d99bd2580" "9bac44c2b4dfbb723906b8c491ec06801feb57aa60448d047dbfdbd1a8650897" "1affe85e8ae2667fb571fc8331e1e12840746dae5c46112d5abb0c3a973f5f5a" "e80a0a5e1b304eb92c58d0398464cd30ccbc3622425b6ff01eea80e44ea5130e" "60f04e478dedc16397353fb9f33f0d895ea3dab4f581307fbf0aa2f07e658a40" "1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" "fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" default)))
+    ("a041a61c0387c57bb65150f002862ebcfe41135a3e3425268de24200b82d6ec9" "4e262566c3d57706c70e403d440146a5440de056dfaeb3062f004da1711d83fc" "de2c46ed1752b0d0423cde9b6401062b67a6a1300c068d5d7f67725adc6c3afb" "41b6698b5f9ab241ad6c30aea8c9f53d539e23ad4e3963abff4b57c0f8bf6730" "51bea7765ddaee2aac2983fac8099ec7d62dff47b708aa3595ad29899e9e9e44" "f41fd682a3cd1e16796068a2ca96e82cfd274e58b978156da0acce4d56f2b0d5" "405fda54905200f202dd2e6ccbf94c1b7cc1312671894bc8eca7e6ec9e8a41a2" "e53cc4144192bb4e4ed10a3fa3e7442cae4c3d231df8822f6c02f1220a0d259a" "978ff9496928cc94639cb1084004bf64235c5c7fb0cfbcc38a3871eb95fa88f6" "ae8d0f1f36460f3705b583970188e4fbb145805b7accce0adb41031d99bd2580" "9bac44c2b4dfbb723906b8c491ec06801feb57aa60448d047dbfdbd1a8650897" "1affe85e8ae2667fb571fc8331e1e12840746dae5c46112d5abb0c3a973f5f5a" "e80a0a5e1b304eb92c58d0398464cd30ccbc3622425b6ff01eea80e44ea5130e" "60f04e478dedc16397353fb9f33f0d895ea3dab4f581307fbf0aa2f07e658a40" "1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" "fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" default)))
  '(ecb-auto-activate t)
  '(erc-modules
    (quote
@@ -194,10 +189,7 @@
      (:from . 22)
      (:subject))))
  '(org-agenda-files (quote ("~/Org/tasks.org")))
- '(org-support-shift-select t)
- ;; '(smtpmail-smtp-server "smtp.gmail2.com")
- ;; '(smtpmail-smtp-service 587))
- )
+ '(org-support-shift-select t))
 (global-set-key (kbd "C-x <up>") 'windmove-up)
 (global-set-key (kbd "C-x <down>") 'windmove-down)
 (global-set-key (kbd "C-x <right>") 'windmove-right)
@@ -786,3 +778,20 @@ PWD is not in a git repo (or the git command is not found)."
 (setq eshell-highlight-prompt nil)
 
 (setq magit-log-show-gpg-status t)
+(setq magit-last-seen-setup-instructions "1.4.0")
+
+(setq ring-bell-function #'(lambda ()))
+
+(set-cursor-color "#ffffff")
+
+(set-frame-parameter nil 'fullscreen 'fullboth)
+(setq fullscreen-p t)
+(defun toggle-fullscreen ()
+  (interactive)
+  (if fullscreen-p
+      (progn
+        (set-frame-parameter nil 'fullscreen 'maximized)
+        (setq fullscreen-p nil))
+    (progn
+      (set-frame-parameter nil 'fullscreen 'fullboth)
+      (setq fullscreen-p t))))
