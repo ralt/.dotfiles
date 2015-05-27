@@ -15,9 +15,11 @@
       color-theme
       color-theme-solarized
       company
+      company-quickhelp
       monokai-theme
       paredit
       php-mode
+      php-extras
       js2-mode
       js2-refactor
       autopair
@@ -285,8 +287,6 @@
 (define-key global-map (kbd "<C-tab>") 'php-complete-function)
 
 (setq message-cite-reply-position 'above)
-
-(add-hook 'makefile-mode-hook 'indent-tabs-mode)
 
 (define-key global-map (kbd "RET") 'newline-and-indent)
 
@@ -784,8 +784,8 @@ PWD is not in a git repo (or the git command is not found)."
 
 (set-cursor-color "#ffffff")
 
-(set-frame-parameter nil 'fullscreen 'fullboth)
-(setq fullscreen-p t)
+(set-frame-parameter nil 'fullscreen 'maximized)
+(setq fullscreen-p nil)
 (defun toggle-fullscreen ()
   (interactive)
   (if fullscreen-p
@@ -795,3 +795,45 @@ PWD is not in a git repo (or the git command is not found)."
     (progn
       (set-frame-parameter nil 'fullscreen 'fullboth)
       (setq fullscreen-p t))))
+
+(defun bf-pretty-print-xml-region (begin end)
+  "Pretty format XML markup in region. You need to have nxml-mode
+http://www.emacswiki.org/cgi-bin/wiki/NxmlMode installed to do
+this.  The function inserts linebreaks to separate tags that have
+nothing but whitespace between them.  It then indents the markup
+by using nxml's indentation rules."
+  (interactive "r")
+  (save-excursion
+      (nxml-mode)
+      (goto-char begin)
+      (while (search-forward-regexp "\>[ \\t]*\<" nil t)
+        (backward-char) (insert "\n"))
+      (indent-region begin end))
+    (message "Ah, much better!"))
+
+(add-hook 'after-init-hook 'global-company-mode)
+(company-quickhelp-mode 1)
+(company-etags 1)
+(global-set-key (kbd "M-t") 'company-complete-common)
+
+(defun my-makefile-indent-line ()
+  (save-excursion
+    (forward-line 0)
+    (cond
+     ;; keep TABs
+     ((looking-at "\t")
+      t)
+     ;; indent continuation lines to 4
+     ((and (not (bobp))
+           (= (char-before (1- (point))) ?\\))
+      (delete-horizontal-space)
+      (indent-to 4))
+     ;; delete all other leading whitespace
+     ((looking-at "\\s-+")
+      (replace-match "")))))
+
+(add-hook 'makefile-mode-hook
+          (lambda ()
+            (setq-local indent-line-function 'my-makefile-indent-line)))
+
+(global-set-key (kbd "M-/") 'find-tag-other-window)
