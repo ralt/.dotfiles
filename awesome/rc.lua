@@ -346,7 +346,9 @@ clientkeys = awful.util.table.join(
         end)
 )
 
-keyletters = {"q", "w", "e", "a", "s", "d", "z", "x", "c"}
+-- Use letters to work with tags
+-- special case: modkey + shift + c is used to close a window, use 9
+keyletters = {"q", "w", "e", "a", "s", "d", "z", "x"}
 for i, letter in ipairs(keyletters) do
     globalkeys = awful.util.table.join(globalkeys,
         awful.key({ modkey }, letter,
@@ -376,6 +378,35 @@ for i, letter in ipairs(keyletters) do
                       end
                   end))
 end
+
+globalkeys = awful.util.table.join(globalkeys,
+    awful.key({ modkey }, "#" .. 9 + 9,
+        function ()
+            local screen = mouse.screen
+            if tags[screen][9] then
+                awful.tag.viewonly(tags[screen][9])
+            end
+    end),
+    awful.key({ modkey, "Control" }, "#" .. 9 + 9,
+        function ()
+            local screen = mouse.screen
+            if tags[screen][9] then
+                awful.tag.viewtoggle(tags[screen][9])
+            end
+    end),
+    awful.key({ modkey, "Shift" }, "#" .. 9 + 9,
+        function ()
+            if client.focus and tags[client.focus.screen][9] then
+                awful.client.movetotag(tags[client.focus.screen][9])
+            end
+    end),
+    awful.key({ modkey, "Control", "Shift" }, "#" .. 9 + 9,
+        function ()
+            if client.focus and tags[client.focus.screen][9] then
+                awful.client.toggletag(tags[client.focus.screen][9])
+            end
+end))
+
 
 clientbuttons = awful.util.table.join(
     awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
